@@ -1,7 +1,7 @@
 (ns rudolfweb.actions
   (:use hiccup.core) 
   (:use hiccup.form-helpers))
-; Hiccup does the HTML generation part
+; Hiccup does the HTML generation part from these strings.
 
 (defn layout [title & body]
 	  (html
@@ -9,10 +9,10 @@
 	    [:body [:h1.header title] body])) 
 
 (defn welcome-page []
-	(layout "Welcome to Clojure Sample Webapp"
-	  [:p "The webapp shows how to use Clojure with Jetty, Ring, Compojure and Hiccup to build a web application."]
-	  [:p "See routes.clj for the valid routes."]
-	  [:h3 "Author: Stefan Roock, EMail: stefan.roock@it-agile.de, Twitter: StefanRoock"]
+	(layout "Welcome to clojure-rudolF"
+	  [:p "Clojure Jetty (server), Ring (http abstraction layer), Compojure (web-forwarding) and Hiccup (formatting)."]
+	  [:p "See routes.clj for the list of example pages, and expand / edit them . "]
+	  [:h3 "g o r u d o l f g o"]
 	  [:img {:src "icon.jpg"}]))
 
 (defn full-name [first second]
