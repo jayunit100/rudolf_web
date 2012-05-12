@@ -28,9 +28,10 @@ To run the webapp with Heroku we need the Procfile file and main-heroku.clj.
 Example of running (easy), note the Procfile is the "driver" : 
 http://blog.heroku.com/archives/2011/7/5/clojure_on_heroku/
 
-Pushing to the Heroku server 
-----------------------------
-
+Pushing and Pulling 
+-------------------
+git push heroku master (this deploys the code, so make sure you run it locally first).
+git push origin master (do this any time, it just commits the code to git).
 
 
 License
