@@ -19,12 +19,12 @@
             [:body [:h1.header title] body])) 
 
 (defn welcome-page []
-	(layout "Welcome to clojure-rudolF"
-	  [:br "Clojure Jetty (server)"]
-          [:br "Ring (http abstraction layer)"]
-          [:br "Compojure (web-forwarding)"] 
-          [:br "Hiccup (formatting)."]
-	  [:br "See routes.clj for the list of example pages, and expand / edit them."]
+	(layout "Welcome to rudolF : This is the hub for our activities.  It is written in clojure."
+	  [:br "C l o j u r e  J e t t y  (service)"]
+          [:br "R i n g (abstraction)"]
+          [:br "C o m p o j u r e (forwarding)"] 
+          [:br "H i c c u p (formatting)."]
+	  [:br "e x t e n d : routes.clj."]
 	  [:h3 "r u d o l f"]
 	  [:img {:src (img)}]))
 
