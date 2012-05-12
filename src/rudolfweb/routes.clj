@@ -2,7 +2,7 @@
   (:use compojure.core) 
   (:use rudolfweb.actions)
   (:require [compojure.route :as route]))
-;  Compojure provides an easy to use DSL for route definitions (on top of Ring)
+;  Compojure provides an easy to use DSL for route definitions 
 
 (defroutes main-routes
    (GET "/" [] (welcome-page))

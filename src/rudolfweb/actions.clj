@@ -3,17 +3,30 @@
   (:use hiccup.form-helpers))
 ; Hiccup does the HTML generation part from these strings.
 
+
+(defn img [] (rand-nth [
+                   "http://www.coloring-page.com/pages/christmas/rudolf.gif"
+                   "http://kepler.nasa.gov/files/mws/JohannesTimeline1.png"
+                   "http://cddis.gsfc.nasa.gov/lw17/images/logo_nasa_sm.gif"]))
+
 (defn layout [title & body]
 	  (html
 	    [:head [:title title]]
-	    [:body [:h1.header title] body])) 
+	    [:link {:rel "stylesheet"
+                    :href "article.css"
+                    :type "text/css"
+                    :media "all"}]
+            [:body [:h1.header title] body])) 
 
 (defn welcome-page []
 	(layout "Welcome to clojure-rudolF"
-	  [:p "Clojure Jetty (server), Ring (http abstraction layer), Compojure (web-forwarding) and Hiccup (formatting)."]
-	  [:p "See routes.clj for the list of example pages, and expand / edit them . "]
-	  [:h3 "g o r u d o l f g o"]
-	  [:img {:src "icon.jpg"}]))
+	  [:br "Clojure Jetty (server)"]
+          [:br "Ring (http abstraction layer)"]
+          [:br "Compojure (web-forwarding)"] 
+          [:br "Hiccup (formatting)."]
+	  [:br "See routes.clj for the list of example pages, and expand / edit them."]
+	  [:h3 "r u d o l f"]
+	  [:img {:src (img)}]))
 
 (defn full-name [first second]
 	(layout "Full Name" (str first " " second)))
