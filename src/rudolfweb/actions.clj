@@ -18,18 +18,25 @@
            :href "article.css"
            :type "text/css"
            :media "all"}]
+   [:script {:type "text/javascript"
+             :src "jquery1.7.2.js"}] 
+   [:script {:type "text/javascript"
+             :src "http://www.cornify.com/js/cornify.js"}]
+   [:script {:type "text/javascript"
+             :src "script.js"}] 
    [:body [:h1.header title] body])) 
 
 (defn welcome-page 
   []
   (layout 
-   "Welcome to rudolF : This is the hub for our activities.  It is written in clojure."
-   [:br "C l o j u r e  J e t t y  (service)"]
-   [:br "R i n g (abstraction)"]
-   [:br "C o m p o j u r e (forwarding)"] 
-   [:br "H i c c u p (formatting)."]
-   [:br "e x t e n d : routes.clj."]
-   [:h3 "r u d o l f"]
+   "Welcome to RudolF: this is the hub for our activities.  It's written in Clojure."
+   [:ul 
+    [:li "Clojure  Jetty  (service)"]
+    [:li "Ring (abstraction)"]
+    [:li "Compojure (forwarding)"] 
+    [:li "Hiccup (formatting)."]
+    [:li "extend : routes.clj."]]
+   [:h3 "Rudolf"]
    [:img {:src (img)}]))
 
 (defn full-name 
