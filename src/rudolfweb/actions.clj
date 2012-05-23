@@ -36,7 +36,7 @@
     [:li "Interested ? Contact jay.vyas@rudolflabs.com" ]
     [:li "This site : Clojure, Jetty, Ring, and Compujure+Hiccup  (service)"]
     [:li "Developers can extend this site here : routes.clj."]]
-   [:h3 "Rudolf"]
+   [:h1 "RudolfLabs.com 5/14/2012"]
    [:img {:src (img)}]))
 
 (defn full-name 
