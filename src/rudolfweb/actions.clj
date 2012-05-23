@@ -29,13 +29,13 @@
 (defn welcome-page 
   []
   (layout 
-   "Welcome to RudolF: this is the hub for our activities.  It's written in Clojure."
+   "Welcome to RudolF: We believe in the power of agile, domain-driven software.  Not sure what that is ?  Thats okay, you'll know soon enough.  This is the internal hub for our ongoing research.  It's written in Clojure.  We are currently developing a business front end as well, so check back !"
    [:ul 
-    [:li "Clojure  Jetty  (service)"]
-    [:li "Ring (abstraction)"]
-    [:li "Compojure (forwarding)"] 
-    [:li "Hiccup (formatting)."]
-    [:li "extend : routes.clj."]]
+    [:li "Our projects : Java, Python, Clojure and Hadoop"]
+    [:li "Our domains : Bioinformatics, Social-Networking, and Global Media"]
+    [:li "Questions ? Contact jay.vyas@rudolflabs.com ]
+    [:li "This site : Clojure, Jetty, Ring, and Compujure+Hiccup  (service)"]
+    [:li "Developers can extend this site here : routes.clj."]]
    [:h3 "Rudolf"]
    [:img {:src (img)}]))
 
