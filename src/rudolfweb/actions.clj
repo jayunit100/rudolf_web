@@ -33,7 +33,7 @@
    [:ul 
     [:li "Our buzzwords : Java, Python, Clojure, MySQL, Heroku, Hadoop"]
     [:li "Our domains : Bioinformatics, Social-Networking, and Global Media"]
-    [:li "Questions ? Contact jay.vyas@rudolflabs.com" ]
+    [:li "Interested ? Contact jay.vyas@rudolflabs.com" ]
     [:li "This site : Clojure, Jetty, Ring, and Compujure+Hiccup  (service)"]
     [:li "Developers can extend this site here : routes.clj."]]
    [:h3 "Rudolf"]
