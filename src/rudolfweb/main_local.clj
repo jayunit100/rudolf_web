@@ -3,10 +3,11 @@
   (:use ring.middleware.reload)
   (:use ring.middleware.file)
   (:use ring.middleware.stacktrace)
-  (:use rudolfweb.routes)
+  (:use rudolfweb.actions);;<--- actions and routes combined
   (:require [compojure.handler :as handler]))
 ; Ring provides that adapter to Jetty and the underlying HTTP requests and responses
 
+;;This is a syntactic sugary way of passing main-routes as a var.
 (def app-auto-reload
   (-> #'main-routes       ; use the routes defined in main-routes 
    (handler/api)          ; neccessary to access the form data in the paramter style way in the route definitions

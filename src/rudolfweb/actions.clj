@@ -1,15 +1,19 @@
 (ns rudolfweb.actions
   (:use hiccup.core) 
-  (:use hiccup.form-helpers))
-; Hiccup does the HTML generation part from these strings.
+  (:use hiccup.form-helpers)
+  (:use rudolfweb.actions)
+  ;Compojure provides an easy to use DSL for route definitions 
+  (:use compojure.core) 
+  (:require [compojure.route :as route]))
 
-
+;;Some image urls, just for fun.
 (defn img 
   [] 
   (rand-nth ["http://www.coloring-page.com/pages/christmas/rudolf.gif"
              "http://kepler.nasa.gov/files/mws/JohannesTimeline1.png"
              "http://cddis.gsfc.nasa.gov/lw17/images/logo_nasa_sm.gif"]))
 
+;;Helper function : this generates the html.
 (defn layout 
   [title & body]
   (html
@@ -21,40 +25,28 @@
    [:script {:type "text/javascript"
              :src "jquery1.7.2.js"}] 
    [:script {:type "text/javascript"
-             :src "http://www.cornify.com/js/cornify.js"}]
-   [:script {:type "text/javascript"
              :src "script.js"}] 
-   [:body [:h1.header title] body])) 
+   [:body [:h1.header title] body]))
 
-(defn welcome-page 
+(def routes2 ["home" "blog" "labs"])
+
+;;
+(defn static-page 
   []
   (layout 
    "Welcome to RudolF: We believe in the power of agile, domain-driven software.  Not sure what that is ?  Thats okay, you'll know soon enough.  This is the internal hub for our ongoing research.  It's written in Clojure.  We are currently developing a business front end as well, so check back !"
    [:ul 
-    [:li "Our buzzwords : Java, Python, Clojure, MySQL, Heroku, Hadoop"]
-    [:li "Our domains : Bioinformatics, Social-Networking, and Global Media"]
-    [:li "Interested ? Contact jay.vyas@rudolflabs.com" ]
-    [:li "This site : Clojure, Jetty, Ring, and Compujure+Hiccup  (service)"]
-    [:li "Developers can extend this site here : routes.clj."]]
+    ;;Dynamically generate the routes by hydrating a vector 
+    (map #(vector :li [:a {:href (str "/" %)} %]) 
+         ["home" "blog" "tools"])
+    ]
    [:h1 "RudolfLabs.com 5/14/2012"]
    [:img {:src (img)}]))
 
-(defn full-name 
-  [first second]
-  (layout "Full Name" (str first " " second)))
 
-(defn name-form 
-  []
-  (layout "Name Form"
-   (form-to 
-    [:post "/post-name"]
-    (label :first-name "First Name") 
-    (text-field :first-name) 
-    [:br] 
-    (label :second-name "Second Name") 
-    (text-field :second-name) 
-    [:p (submit-button "Submit")])))
-	
-(defn post-name 
-  [first second]
-  (full-name first second))
+;;Compujure Routes
+(defroutes main-routes
+  (GET "/" [] (static-page))
+  (GET "/static-page" [] (static-page))
+  (route/not-found "<h1>Page not found</h1>"))
+
