@@ -24,7 +24,7 @@
   "Home page"
   []
   (layout 
-    "Welcome to RudolF -- where dreams come true!"
+    "RudolF"
    [:ul 
     ;;Dynamically generate the routes by hydrating a vector 
     (map #(vector :li [:a {:href (str "/" %)} %]) 
