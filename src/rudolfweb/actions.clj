@@ -14,7 +14,7 @@
   (html
    [:head [:title title]]
    [:link {:rel "stylesheet"
-           :href "style/article.css"
+           :href "style/home.css"
            :type "text/css"
            :media "all"}]
    [:body [:h1.header title] body]))
@@ -24,7 +24,7 @@
   "Home page"
   []
   (layout 
-    "..Welcome to RudolF.."
+    "Welcome to RudolF -- where dreams come true!"
    [:ul 
     ;;Dynamically generate the routes by hydrating a vector 
     (map #(vector :li [:a {:href (str "/" %)} %]) 
