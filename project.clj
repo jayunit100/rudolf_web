@@ -7,4 +7,4 @@
                  [compojure "0.6.4"]
                  [hiccup "0.3.7"]]
   :dev-dependencies
-								 [[ring/ring-devel "0.2.3"]])
+	        [[ring/ring-devel "0.2.3"]])

@@ -1,18 +1,28 @@
-The RudolF blog-algorithms-site-playground ! 
-Uses 
+The RudolF blog-algorithms-site-playground! 
 
-Jetty (server), 
-Ring (Http abstraction layer for simpler sites)
-Compojure (Http forwarding and routing library) 
-Hiccup (HTML representation, in Clojure) 
+It uses 
+
+ - Jetty (server), 
+ - Ring (Http abstraction layer for simpler sites)
+ - Compojure (Http forwarding and routing library) 
+ - Hiccup (HTML representation, in Clojure) 
 
 Get Started By running locally
 ------------------------------
-* lein deps (This goes off to maven and grabs all the jars). 
-* lein repl (We all know what this does) 
-* > (use 'rudolfweb.main-local) 
-* > (boot) 
-* Finally : Open http://localhost:8080 in your web browser: you should see a welcome message. For other URLs to try take a look into routes.clj.
+* get dependencies (goes off to maven and grabs all the jars)
+
+        $ lein deps
+
+* start clojure from inside the project
+
+        $ lein repl 
+
+* and from the repl:
+
+        user=> (use 'rudolfweb.main-local) 
+        user=> (boot) 
+
+* Finally : Open [the page](http://localhost:8080) in your web browser: you should see a welcome message. For other URLs to try take a look at util.clj.
 
 A more "herokuish" way to run locally:
 --------------------------------------
@@ -21,17 +31,24 @@ A more "herokuish" way to run locally:
 
 Run on Heroku
 -------------
-First create a new app at Heroku with the cedar stack: heroku create --stack cedar <my-app-name>
+First create a new app at Heroku with the cedar stack: 
+
+    heroku create --stack cedar <my-app-name>
 
 To run the webapp with Heroku we need the Procfile file and main-heroku.clj.
 
-Example of running (easy), note the Procfile is the "driver" : 
-http://blog.heroku.com/archives/2011/7/5/clojure_on_heroku/
+[Example](http://blog.heroku.com/archives/2011/7/5/clojure_on_heroku/) of running (easy), note the Procfile is the "driver".
+
 
 Pushing and Pulling 
 -------------------
-git push heroku master (this deploys the code, so make sure you run it locally first).
-git push origin master (do this any time, it just commits the code to git).
+ - this deploys the code, so make sure you run it locally first:
+
+        git push heroku master
+
+ -  do this any time, it just commits the code to git:
+
+        git push origin master
 
 
 License
