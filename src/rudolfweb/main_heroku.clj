@@ -12,7 +12,8 @@
        (var main-routes));;; <--- neccessary to access the form data in the paramter style way in the route definitions
     "public"));;; <--- serve static files from directory 'public'
 
-(defn -main []
+(defn -main 
+  []
   (let [_ (print "port is set ?" (System/getenv "PORT"))
         port (Integer/parseInt (System/getenv "PORT"))] ; Watch out ! PORT is a string ! 
     (run-jetty app-heroku {:port port})))             ; run on Heroku!

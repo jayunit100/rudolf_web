@@ -5,34 +5,31 @@
   ;Compojure provides an easy to use DSL for route definitions 
   (:use compojure.core) 
   (:require [compojure.route :as route]
-            [ring.util.response :as resp]
-            ))
+            [ring.util.response :as resp]))
 
-;;Helper function : this generates the html.
+
 (defn layout 
+  "Helper function : this generates the html"
   [title & body]
   (html
    [:head [:title title]]
    [:link {:rel "stylesheet"
-           :href "article.css"
+           :href "style/article.css"
            :type "text/css"
            :media "all"}]
-   [:script {:type "text/javascript"
-             :src "jquery1.7.2.js"}] 
-   [:script {:type "text/javascript"
-             :src "script.js"}] 
    [:body [:h1.header title] body]))
 
-;;Home page : 
+
 (defn rudolf_home
+  "Home page"
   []
   (layout 
     "..Welcome to RudolF.."
    [:ul 
     ;;Dynamically generate the routes by hydrating a vector 
     (map #(vector :li [:a {:href (str "/" %)} %]) 
-         ["home" "blog" "tools"])]
-   ))
+         ["home" "blog" "tools"])]))
+
 
 ;;Compujure Routes
 (defroutes main-routes
