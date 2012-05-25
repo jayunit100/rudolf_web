@@ -12,7 +12,7 @@
   (-> #'main-routes       ; use the routes defined in main-routes 
    (handler/api)          ; neccessary to access the form data in the paramter style way in the route definitions
    (wrap-file "public")   ; serve static files from directory 'public'
-   (wrap-reload '(rudolfweb.main-local rudolfweb.routes rudolfweb.actions)) ; reload automatically
+   (wrap-reload '(rudolfweb.main-local rudolfweb.utils rudolfweb.actions)) ; reload automatically
    (wrap-stacktrace)))    ; show stacktrace in browser when exceptions are thrown in the server
 
 (defn boot []
