@@ -5,6 +5,7 @@
                  [ring/ring-core "1.0.0-RC1"]
                  [ring/ring-jetty-adapter "0.3.9"]
                  [compojure "0.6.4"]
+                 [clj-yaml "0.3.0-SNAPSHOT"]
                  [hiccup "0.3.7"]]
   :dev-dependencies
 	        [[ring/ring-devel "0.2.3"]])

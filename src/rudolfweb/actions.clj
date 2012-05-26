@@ -4,6 +4,8 @@
   (:use rudolfweb.actions)
   ;Compojure provides an easy to use DSL for route definitions 
   (:use compojure.core) 
+  (:use ring.middleware.params)
+  (:require rudolfweb.blogtemplate)
   (:require [compojure.route :as route]
             [ring.util.response :as resp]))
 
@@ -33,8 +35,15 @@
 
 ;;Compujure Routes
 (defroutes main-routes
-  (GET "/" [] (resp/redirect "/home"))
-  (GET "/home" [] (rudolf_home))
-  (GET "/blog" [] (resp/redirect "/public/blog/index.html"))
-  (GET "/tools" [] (resp/redirect "/public/tools/index.html"))
-  (route/not-found "<h1>Page not found</h1>"))
+  (GET "/" [] 
+       (resp/redirect "/home"))
+  (GET "/home" [] 
+       (rudolf_home))
+  (GET "/blog" [] 
+       (resp/redirect "/public/blog/index.html"))
+  (GET "/blog/:name" {params :params} 
+       (rudolfweb.blogtemplate/post (params :name))) ;; "RudolF_first"))
+  (GET "/tools" [] 
+       (resp/redirect "/public/tools/index.html"))
+  (route/not-found 
+       "<h1>Page not found</h1>"))
