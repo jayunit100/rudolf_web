@@ -13,7 +13,6 @@
   ""
   [name]              ;; read file based on name
   (html               ;; return as html
-    (apply str        ;; put together header, file we just read, and footer
-           header
-           (slurp (apply str "public/blog/" name ".html"))
-           footer)))
+   [:html [header
+           [:body (slurp (apply str "public/blog/" name ".html"))]
+           footer]]))
