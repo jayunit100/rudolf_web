@@ -41,8 +41,8 @@
        (rudolf_home))
   (GET "/blog" [] 
        (resp/redirect "/public/blog/index.html"))
-  (GET "/blog/:name" {params :params} 
-       (rudolfweb.blogtemplate/post (params :name))) ;; "RudolF_first"))
+  (GET "/blog/:name" {params :params}                ;; (may be) destructuring: the GET macro binds a map of parameters to params
+       (rudolfweb.blogtemplate/post (params :name))) ;; then we pull out the name and pass it to the blog page generator
   (GET "/tools" [] 
        (resp/redirect "/public/tools/index.html"))
   (route/not-found 
