@@ -40,7 +40,9 @@
   (GET "/home" [] 
        (rudolf_home))
   (GET "/blog" [] 
-       (resp/redirect "/public/blog/index.html"))
+       (rudolfweb.blogtemplate/index))               ;; I don't understand why this doesn't also catch "/blog/"
+  (GET "/blog/" []                                   ;; that's why there's an extra, identical handler here
+       (rudolfweb.blogtemplate/index))
   (GET "/blog/:name" {params :params}                ;; (may be) destructuring: the GET macro binds a map of parameters to params
        (rudolfweb.blogtemplate/post (params :name))) ;; then we pull out the name and pass it to the blog page generator
   (GET "/tools" [] 
