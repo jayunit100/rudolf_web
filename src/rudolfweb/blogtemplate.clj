@@ -1,14 +1,25 @@
 (ns rudolfweb.blogtemplate
-  (:use [hiccup.core :as hc])
-  (:use [hiccup.page-helpers :as hph]))
+  (:use [hiccup.core          :as hc])
+  (:use [hiccup.page-helpers  :as hph])
+  (:use [clj-yaml.core        :as yaml]))
 
 
-(def body-header     ;; for now, the header will be simple
-  [:ul [:li "this will eventually be a list of posts"]])
+(defn make-link
+  [name]
+  [:a {:href name} name])
+
+
+(def articles-file
+  (yaml/parse-string (slurp "public/blog/articles.yaml")))
+
+
+(def body-header
+  [:ul (for [art-name (articles-file :articles)]
+            [:li (make-link art-name)])])
   
 
 (def footer 
-  [:sub "This post brought to you by RudolF Inc"]) ;; the footer will also be simple for now
+  [:sub "This post brought to you by RudolF Inc"])
 
 
 (def header
