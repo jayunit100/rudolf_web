@@ -3,3 +3,39 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+.code {
+  color: blue;
+  background-color: #cdc9c9;
+  overflow: auto;
+  padding: 10px;
+}
+
+.box {
+  background-color: black;
+  color: yellow;
+  padding: 5px;
+}
+
+.good {
+  color: green;
+}
+
+.bad {
+  color: red;
+}
+
+/* center the text in tables */
+table th, table tr {
+  text-align: center;
+}
+
+/* to draw borders around td's and th's in tables */
+.bordered, .bordered th, .bordered td {
+  border: 2px solid black;
+}
+
+/* to give th's and td's padding */
+.padded th, .padded td {
+  padding: 5px;
+}

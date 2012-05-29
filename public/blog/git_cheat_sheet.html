@@ -1,0 +1,113 @@
+<p>Here are some of the git commands that I find most useful, covering
+configuration, staging, and history:</p>
+
+
+<h2>Configuration</h2>
+<pre class="code">
+# change settings for all users
+#   affects file in /etc/gitconfig
+git config --system [??].[attribute] [value]
+
+# change settings for one user
+#   affects file in $HOME/.gitconfig
+git config --global [??].[attribute] [value]
+
+# change settings for one project
+#   affects file in [projectroot]/.git/config
+git config [??].[attribute] [value]
+
+# change editor
+git config core.editor emacs
+
+# check all settings
+git config --list
+
+# check specific setting
+git config [??].[attribute]
+</pre>
+
+
+<h2>Staging area</h2>
+<pre class="code">
+# remove file from staging area
+git rm --cached [file]
+
+# see diff of files in staging area
+git diff --staged
+
+# see tracked files
+git ls-files
+
+# see information about tree-ish objects
+#   what is a tree-ish object?  the man page doesn't explain it
+git ls-tree [sha-1] [path]
+</pre>
+
+
+<h2>History</h2>
+<pre class="code">
+# see a "pretty" commit history
+#   setting: (oneline|short|full|fuller|format:"format string").  note that the --pretty option can interfere with other log options
+git log --pretty=[setting]
+
+# see only a limited number of commits
+#   accepts any (?) positive integer
+git log -[n]
+
+# show diffs with each commit
+git log -p
+ 
+# see history of a specific file
+#   is this any different from just 'git log [file]'?
+git log --follow [file]
+
+# see a branch graph
+git log --graph
+
+# display file statistics with each commit:  number of additions, deletions, etc. 
+#   see also --shortstat ??
+git log --stat
+
+# more log options
+git log (--name-only|--name-status|--abbrev-commit|--relative-date|--since|--until|--grep)
+
+# make *all* criteria match
+#   instead of *any* predicate causing a match, *all* predicates must be true to match
+git log --all-match [... conditions ...]
+
+# show only/don't show merge commits
+git log --merges
+git log --no-merges
+</pre>
+
+
+<h2>Miscellaneous</h2>
+<pre class="code">
+# amend previous commit.  uses staging area for commit
+#   what happens with sha-1 business?  does this command take more arguments (i.e. for commit message)?
+git commit --amend
+ 
+# make a command alias
+#   ... not sure if those are supposed to be quotation marks or backticks or what ...
+git config --global alias.[thealias] ['the original command']
+</pre>
+
+
+
+Tricks:
+
+ - auto-completion:  copy contrib/completion/git-completion.bash (look in the git source code?) into your home
+   directory and 'source' it into your .bashrc file.  then copy to '/opt/local/etc/bash_completion.d' (Mac) or
+   '/etc/bash_completion.d/' (Linux).  then it will tab-complete.  also works with options (i.e. git log --\t)
+
+
+
+questions:
+
+ - in .gitignore, if you have a pattern that says don't include, and another that contradicts it, who wins?
+
+ - how many characters needed to identify an sha-1 key?  (seems to complain if ambiguous)
+ 
+ - what is a tracking branch
+ 
+ 
