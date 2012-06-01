@@ -30,7 +30,7 @@
    [:ul 
     ;;Dynamically generate the routes by hydrating a vector 
     (map #(vector :li [:a {:href (str "/" %)} %]) 
-         ["home" "blog" "tools"])]))
+         ["home" "blog/" "tools"])]))
 
 
 ;;Compujure Routes
@@ -39,9 +39,7 @@
        (resp/redirect "/home"))
   (GET "/home" [] 
        (rudolf_home))
-  (GET "/blog" [] 
-       (rudolfweb.blogtemplate/index))               ;; I don't understand why this doesn't also catch "/blog/"
-  (GET "/blog/" []                                   ;; that's why there's an extra, identical handler here
+  (GET "/blog/" []                                   
        (rudolfweb.blogtemplate/index))
   (GET "/blog/:name" {params :params}                ;; (may be) destructuring: the GET macro binds a map of parameters to params
        (rudolfweb.blogtemplate/post (params :name))) ;; then we pull out the name and pass it to the blog page generator
