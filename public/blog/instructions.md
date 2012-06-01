@@ -19,6 +19,5 @@ How to add a blog post
 Loose ends/Unfinished business
 ------------
 
- 1. what to do with the yaml file
- 2. how to dynamically generate the list of posts
- 3. stylesheets
+ 1. extending the yaml file
+    - do we want any other data in there?
