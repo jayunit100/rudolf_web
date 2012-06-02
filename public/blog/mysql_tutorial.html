@@ -1,0 +1,400 @@
+<div class="section">
+<h2>Setting up a user account and schema</h2>
+Logging in to MySQL typically requires a username and a password.
+
+MySQL comes with one privileged user, root, predefined.
+
+The root user is able to create new users, and assign them passwords and privileges, and create tables, schemas
+and do many other things.
+
+First, we need to log in as the root user, and:
+<ol> 
+ <li>create a new user account with a password</li>
+ <li>create a new schema</li>
+ <li>grant the new user some privileges on the new schema</li>
+</ol>
+
+<pre class="code">
+$ mysql -u root -p
+</pre>
+
+<pre class="code">
+-- this is a comment
+-- remember to pick a good password!
+create user 'myself'@'localhost' identified by 'p@$$word';
+
+create database tutorial;
+
+grant all on tutorial.* to 'myself'@'localhost';
+
+exit;
+</pre>
+
+<ul>Key points:
+ <li> users & passwords:  once user accounts are created, they may log in to MySQL using their passwords </li>
+ <li> privileges:  users must be granted privileges in order to use tables and schemas </li>
+ <li> using the MySQL shell:  MySQL can be used interactively </li>
+ <li> schemas:  typically used to organize a set of related tables </li>
+ <li> comments:  start with '-- ' and tell MySQL to ignore the line </li>
+ <li> terminators:  semicolon (;) </li>
+</ul>
+</div>
+
+
+
+
+
+<div class="section">
+<h2>Creating and showing tables</h2>
+Now that we have a user account and a schema, let's log in:
+
+<pre class="code">
+$ mysql -u myself -p
+</pre>
+
+Okay, now we need to find and use our schema
+<pre class="code">
+-- lists the schemas that we are allowed to see and use
+show databases;
+
+-- sets the active schema to 'tutorial'
+use tutorial;
+</pre>
+
+Great!  Now we need to set up a table so that we can play around with some data:
+<pre class="code">
+-- note the primary key and unique index and data types
+create table pizzas (
+  id     int,
+  name   varchar(40),
+  price  decimal(5,2),
+    primary key (id),
+    unique index (name)
+);
+</pre>
+
+What if we forget the name of the table?  No problem!  Just do:
+<pre class="code">
+show tables;
+</pre>
+and MySQL will happily tell you all of the tables in the current schema.
+
+
+<ul>Key points:
+ <li> setting the current schema:  this makes it easy to work with tables in the selected schema <li>
+ <li> making a table:  tables must be defined with appropriate columns before they can be used <li>
+ <li> listing the tables in the current schema<li>
+</ul>
+</div>
+
+
+
+
+<div class="section">
+<h2>Inserting data into tables</h2>
+What's the use of MySQL if we can't add data to tables??
+
+Let's make some pizza!
+<pre class="code">
+-- note the name of the table - 'pizzas'
+insert into pizzas (id, name, price) values (3, "plain cheese", 9.99);
+
+-- remember how many columns we gave 'pizzas' when we defined it?  3!!
+insert into pizzas (id, name, price) values (2, "sausage", 11.99);
+
+-- that's why we need 3 values here, too!
+insert into pizzas (id, name, price) values (4, "hawaiian", 15.99);
+
+-- numbers don't need quotation marks, but strings do!
+insert into pizzas (id, name, price) values (1, "tomato basil", 12.99);
+</pre>
+
+Okay, that's a great, but how do we know any of that worked?  How about:
+<pre class="code">
+-- check what's in pizzas;
+select * from pizzas;
+</pre>
+Cool, we have 4 pizzas in our 'pizzas' table.  Let's try and add some more:
+
+<pre class="code">
+insert into pizzas (id, name, price) values (4, "pepperoni", 11.99);
+
+insert into pizzas (id, name, price) values (5, "plain cheese", 10.99);
+</pre>
+Oh no!  That didn't work!  What happened??
+
+Remember how we defined 'pizzas'?  The 'id' column and the 'name' column are both unique --
+so no duplicates are allowed!
+
+When we tried to add duplicate rows, MySQL complained!
+
+Now try this:
+<pre class="code">
+insert into pizzas (id, name, price) values (5, "meat lover's", 15.99);
+</pre>
+That did work!  Why?
+
+Because we didn't say that 'price' has to be unique!
+
+<ul>Key points:
+ <li>number of values must match table</li>
+ <li>column constraints can cause inserts to fail</li>
+ <li>strings must be quoted</li>
+</ul>
+</div>
+
+
+
+
+<div class="section">
+<h2>Reading data from tables</h2>
+Now that we have some pizzas, let's eat them (figuratively)!
+
+We'll use 'select' statements to read data from our table.
+
+We can easily read the entire table using the '*' shortcut:
+<pre class="code">
+-- basic select (already used above ^) reads all rows and all columns from the table
+select * from pizzas;
+</pre>
+But if we only want some columns, we just list them explicitly:
+<pre class="code">
+-- reads specified columns from all rows of the table
+select name, price from pizzas;
+</pre>
+We can even manipulate the values!  What if we wanted to know how much it would cost
+to get two of each pizza?  No problem:
+<pre class="code">
+-- performs operations on columns from all rows of the table
+select name, price * 2 from pizzas;
+</pre>
+Wait, we forgot about tax:
+<pre class="code">
+-- add in tax
+select name, price * 2 * 1.07 from pizzas;
+</pre>
+
+<ul>Key points:
+ <li>'select' statements read rows from tables</li>
+ <li>use '*' to select all columns</li>
+ <li>explicitly name columns otherwise</li>
+ <li>all rows are returned</li>
+ <li>column values can be manipulated</li>
+</ul>
+</div>
+
+
+
+
+
+<div class="section">
+<h2>Filter data</h2>
+What if we don't want to see ALL of the pizzas?
+
+Using the power of the 'where' clause, we can limit the set of rows returned.
+
+Let's say we're cheapskates and know we want to spend less than $12 on a pizza:
+<pre class="code">
+select id, name, price from pizzas where price < 12;
+</pre>
+or we just worked out and need some serious protein:
+<pre class="code">
+select name from pizzas where name regexp 'meat';
+</pre>
+or we're 5 years old and only eat cheese pizzas:
+<pre class="code">
+select * from pizzas where name = 'plain cheese';
+</pre>
+
+<ul>Key points:
+ <li>use a 'where' clause to limit results</li>
+ <li>can use equality or inequality predicates</li>
+</ul>
+</div>
+
+
+
+
+
+<div class="section">
+<h2>Grouping data</h2>
+Sometimes, you need to get a single piece of information about a bunch of rows, all at once.
+
+Look no further than the 'group by' clause and aggregating functions!
+
+Let's see how many pizzas there are of each different price:
+<pre class="code">
+select price, count(*) from pizzas group by price;
+</pre>
+And how many cheap pizzas there are:
+<pre class="code">
+select count(*) from pizzas where price < 12;
+</pre>
+WHOA!  There wasn't a 'group by' clause there ... what happened??
+
+When you use an aggregating function (such as count) without a 'group by' clause, ALL of the 
+rows are placed in a SINGLE group!
+
+Try this:  let's find out how much it would cost to get one of each of the expensive pizzas:
+<pre class="code">
+select sum(price) from pizzas where price >= 12;
+</pre>
+
+<ul>Key points:
+ <li>'group by' clauses separate your rows into groups</li>
+ <li>aggregating functions -- such as min, max, avg, sum, and count -- analyze groups</li>
+ <li>one row per group is returned</li>
+ <li>an aggregating function without a 'group by' clause returns a single row</li>
+ <li>'group by' and 'where' clauses can be combined -- but the 'where' clause goes first!</li>
+</ul>
+</div>
+
+
+
+
+
+<div class="section">
+<h2>Deleting data</h2>
+Getting rid of data is important, too.
+
+The 'delete' statement takes care of that.
+
+Let's try one out:
+<pre class="code">
+delete from pizzas;
+
+-- and check what the result was
+select * from pizzas;
+</pre>
+Oops -- we just deleted everything in the table!  
+
+Always be careful with 'delete' statements -- if you don't use a 'where' clause, they'll delete everything!
+
+Let's try that again (but first we'll rebuild the table):
+<pre class="code">
+-- rebuild the database:  this time with an extra row
+insert into pizzas (id, name, price) values 
+  (3, "plain cheese", 9.99),
+  (2, "sausage", 11.99),
+  (4, "hawaiian", 15.99),
+  (1, "tomato basil", 12.99),
+  (5, "meat lover's", 15.99),
+  (6, "unpopular pizza", 15.99);
+
+-- check what's in the table
+select * from pizzas;
+</pre>
+Let's try and delete the "unpopular pizza":
+<pre class="code">
+delete from pizzas where price = 15.99;
+
+-- ... and check the results
+select * from pizzas;
+</pre>
+Oh noes!!  Wrong again -- we deleted all 3 rows that have a price of 15.99!
+
+Let's rebuild the table again:
+<pre class="code">
+insert into pizzas (id, name, price) values 
+  (4, "hawaiian", 15.99),
+  (5, "meat lover's", 15.99);
+</pre>
+And try one last time:
+
+<pre class="code">
+delete from pizzas where id = 6;
+
+select * from pizzas;
+</pre>
+
+<ul>Key points:
+ <li>use 'delete' to remove rows</li>
+ <li>use a 'where' clause to delete only the appropriate rows</li>
+</ul>
+</div>
+
+
+
+
+
+<div class="section">
+<h2>Updating data</h2>
+Uh-oh, the customers are complaining about our menu.  Let's spice up some names to keep them off our back!
+
+We'll have to use 'update' statments to change our pizzas:
+<pre class="code">
+update pizzas set name = "hawaiian pineapple" where name = "hawaiian";
+
+update pizzas set name = "zesty Italian sausage" where name = "sausage";
+</pre>
+
+Now our supplier is upping his prices.  We have to increase *our* prices by $1 each!
+<pre class="code">
+-- no 'where' clause:  affects every row!
+update pizzas set price = price + 1;
+</pre>
+
+<ul>Key points:
+ <li>use 'update' to modify rows</li>
+ <li>use a 'where' clause to modify only the appropriate rows</li>
+ <li>the "old" values can be used</li>
+</ul>
+</div>
+
+
+
+
+
+<div class="section">
+<h2>Sorting data</h2>
+We need to put the most expensive pizzas at the top of the menu, so people will see them first!
+
+We'll have to use 'order by' to sort these pizzas:
+<pre class="code">
+select * from pizzas order by price desc;
+</pre>
+No wait, we want the cheapest pizzas at the top to increase sales!!
+<pre class="code">
+select * from pizzas order by price asc;
+</pre>
+
+<ul>Key points:
+ <li>use 'order by' to sort results</li>
+ <li>'order by' can be used in conjunction with 'where' and 'group by'</li>
+</ul>
+</div>
+
+
+
+
+
+<div class="section">
+<h2>Unit test</h2>
+If you run this query and get these results:
+<pre class="code">
+mysql> select * from pizzas order by price desc;
++----+-----------------------+-------+
+| id | name                  | price |
++----+-----------------------+-------+
+|  4 | hawaiian pineapple    | 16.99 |
+|  5 | meat lover's          | 16.99 |
+|  1 | tomato basil          | 13.99 |
+|  2 | zesty Italian sausage | 12.99 |
+|  3 | plain cheese          | 10.99 |
++----+-----------------------+-------+
+</pre>
+you're good to go!!
+</div>
+
+
+
+
+<div class="section">
+<h2>Further reading</h2>
+<ul>
+ <li>joins</li>
+ <li>views</li>
+ <li>relational algebra</li>
+ <li>ORM</li>
+</ul>
+</div>
