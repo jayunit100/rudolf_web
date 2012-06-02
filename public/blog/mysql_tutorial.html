@@ -31,7 +31,7 @@ exit;
 </pre>
 
 <ul>Key points:
- <li> users & passwords:  once user accounts are created, they may log in to MySQL using their passwords </li>
+ <li> users &amp; passwords:  once user accounts are created, they may log in to MySQL using their passwords </li>
  <li> privileges:  users must be granted privileges in order to use tables and schemas </li>
  <li> using the MySQL shell:  MySQL can be used interactively </li>
  <li> schemas:  typically used to organize a set of related tables </li>
@@ -195,7 +195,7 @@ Using the power of the 'where' clause, we can limit the set of rows returned.
 
 Let's say we're cheapskates and know we want to spend less than $12 on a pizza:
 <pre class="code">
-select id, name, price from pizzas where price < 12;
+select id, name, price from pizzas where price &lt; 12;
 </pre>
 or we just worked out and need some serious protein:
 <pre class="code">
@@ -228,7 +228,7 @@ select price, count(*) from pizzas group by price;
 </pre>
 And how many cheap pizzas there are:
 <pre class="code">
-select count(*) from pizzas where price < 12;
+select count(*) from pizzas where price &lt; 12;
 </pre>
 WHOA!  There wasn't a 'group by' clause there ... what happened??
 
