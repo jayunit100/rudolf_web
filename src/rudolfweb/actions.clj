@@ -2,6 +2,7 @@
   (:use hiccup.core) 
   (:use hiccup.form-helpers)
   (:use rudolfweb.actions)
+  (:use rudolfweb.tools)
   ;Compojure provides an easy to use DSL for route definitions 
   (:use compojure.core) 
   (:use ring.middleware.params)
@@ -30,8 +31,7 @@
    [:ul 
     ;;Dynamically generate the routes by hydrating a vector 
     (map #(vector :li [:a {:href (str "/" %)} %]) 
-         ["home" "blog/" "tools"])]))
-
+         ["home" "blog/" "tools/"])]))
 
 ;;Compujure Routes
 (defroutes main-routes
@@ -43,7 +43,12 @@
        (rudolfweb.blogtemplate/index))
   (GET "/blog/:name" {params :params}                ;; (may be) destructuring: the GET macro binds a map of parameters to params
        (rudolfweb.blogtemplate/post (params :name))) ;; then we pull out the name and pass it to the blog page generator
-  (GET "/tools" [] 
+  (GET "/tools/" [] 
        (resp/redirect "/public/tools/index.html"))
+  
+  ;;word enrichment tool, takes a url as input, outputs word count.
+  (GET "/tools/:wordenrichment_url" {params :params}
+         (str (rudolfweb.tools/wordenrichment_url (params :url))))
+
   (route/not-found 
        "<h1>Page not found</h1>"))
