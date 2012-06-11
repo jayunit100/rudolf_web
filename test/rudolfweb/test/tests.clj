@@ -2,6 +2,7 @@
   (:use clojure.test)
   (:use rudolfweb.tools)
   (:use clojure.string)
+  (:use [clojure.data.json :only (read-json json-str)])
   )
 
 (deftest snippet1
@@ -16,4 +17,7 @@
     {"a" 3, "s" 1, "asdg" 3, "v" 1}))
 
 (deftest test_we_url
-  (> (count (wordenrichment_url "http://www.google.com")) 10))
+  (> (count (wordenrichment_url "https://github.com/clojure/data.json")) 10))
+
+(deftest test_json
+  (json-str {:a [1 2 3], :b "Hello"}))

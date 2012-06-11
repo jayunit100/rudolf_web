@@ -6,6 +6,7 @@
                  [ring/ring-jetty-adapter "0.3.9"]
                  [compojure "0.6.4"]
                  [clj-yaml "0.3.0-SNAPSHOT"]
-                 [hiccup "0.3.7"]]
+                 [hiccup "0.3.7"]
+                 [org.clojure/data.json "0.1.2"]]
   :dev-dependencies
 	        [[ring/ring-devel "0.2.3"]])

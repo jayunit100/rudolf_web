@@ -4,6 +4,7 @@
   (:use rudolfweb.actions)
   (:use rudolfweb.tools)
   ;Compojure provides an easy to use DSL for route definitions 
+  (:use [clojure.data.json :only (read-json json-str)])
   (:use compojure.core) 
   (:use ring.middleware.params)
   (:require rudolfweb.blogtemplate)
@@ -46,9 +47,9 @@
   (GET "/tools/" [] 
        (resp/redirect "/public/tools/index.html"))
   
-  ;;word enrichment tool, takes a url as input, outputs word count.
+  ;;word enrichment tool, takes a url as input, outputs word count as json
   (GET "/tools/:wordenrichment_url" {params :params}
-         (str (rudolfweb.tools/wordenrichment_url (params :url))))
+         (json-str (rudolfweb.tools/wordenrichment_url (params :url))))
 
   (route/not-found 
        "<h1>Page not found</h1>"))
