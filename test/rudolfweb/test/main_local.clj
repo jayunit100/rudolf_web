@@ -3,5 +3,9 @@
   (:use rudolfweb.main-local))
 
 
-(deftest test-unimplemented
-  (is (= 1 2) "test is not implemented"))
+(deftest test-app-auto-reload
+  (is (= 1 2) "unsure how to test this"))
+
+
+(deftest test-boot
+  (is (boot)))
