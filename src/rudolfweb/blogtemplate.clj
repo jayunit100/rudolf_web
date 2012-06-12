@@ -1,7 +1,7 @@
 (ns rudolfweb.blogtemplate
-  (:use [hiccup.core          :as hc])
-  (:use [hiccup.page-helpers  :as hph])
-  (:use [clj-yaml.core        :as yaml]))
+  (:require [hiccup.core          :as hc])
+  (:require [hiccup.page-helpers  :as hph])
+  (:require [clj-yaml.core        :as yaml]))
 
 
 (defn make-link
@@ -18,7 +18,7 @@
 (defn body-header
   ""
   [article-names]
-  [:ul (for [art-name article-names)]
+  [:ul (for [art-name article-names]
             [:li (make-link art-name)])])
   
 
@@ -49,7 +49,7 @@
   (hc/html                                ;;  return as html
    (hph/doctype :html5)                   ;;  want browsers in strict mode
    [:html header                          ;;  the header should import stylesheets and scripts, if necessary
-          [:body (body-header (read-articles-file :articles))  ;;  the "body-header" should include a list of all posts
+          [:body (body-header ((read-articles-file) :articles))  ;;  the "body-header" should include a list of all posts
                  (read-article name)      ;;  the body consists of the text of the post ... need to check that the yaml file says it's okay
                  footer]]))               ;;  plus a generic footer
 
