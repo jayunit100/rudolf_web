@@ -35,11 +35,10 @@
 
 
 (defn read-article
-  "given a article name, return the html for a blog post, 
+  "given an article name, return the html for a blog post, 
    or an html-ified error message if the file doesn't exist"
   [name]
-  (try (slurp (apply str "public/blog/" name ".html"))
-       (catch Exception e "<p>error: invalid blog post name</p>")))
+  (slurp (apply str "public/blog/" name ".html")))
 
 
 (defn post
@@ -50,7 +49,8 @@
    (hph/doctype :html5)                   ;;  want browsers in strict mode
    [:html header                          ;;  the header should import stylesheets and scripts, if necessary
           [:body (body-header ((read-articles-file) :articles))  ;;  the "body-header" should include a list of all posts
-                 (read-article name)      ;;  the body consists of the text of the post ... need to check that the yaml file says it's okay
+                 (try (read-article name)      ;;  the body consists of the text of the post ... need to check that the yaml file says it's okay
+                      (catch Exception e (str "<p>error: (" name ") is an invalid blog post name</p>")))
                  footer]]))               ;;  plus a generic footer
 
 

@@ -7,7 +7,7 @@
 (deftest test-read-articles-file
   (let [af (bt/read-articles-file)]
    (is (= 1 (count af)))
-   (is (> (count (af :articles)) 1))))
+   (is (> (count (af :articles)) 2))))
 
 
 (deftest read-article
@@ -15,8 +15,13 @@
 
 
 (deftest test-can-find-all-articles
-  (for [af (bt/read-articles-file)]
-   (is (> (count (bt/read-article af)) 100)))) ;; uh ... trying to check that the file could be read successfully and that an html error response was not being returned
+  (let [af (bt/read-articles-file)]
+   (is (= (count af) 1))
+   (is (> (count (af :articles)) 2))
+   (doall
+    (for [a (af :articles)]
+     (try (bt/read-article a)
+          (catch Exception e (is (= 1 2) (str "failed to read article file " a ", exception " e))))))))
 
 
 (deftest test-index
@@ -46,7 +51,7 @@
 
 (deftest test-body-header-html
   (is (= (hc/html (bt/body-header ((bt/read-articles-file) :articles))) 
-         "<ul><li><a href=\"RudolF_first\">RudolF_first</a></li><li><a href=\"git_cheat_sheet\">git_cheat_sheet</a></li><li><a href=\"mysql_tutorial\">mysql_tutorial</a></li></ul>")))
+         "<ul><li><a href=\"Rudolf\">Rudolf</a></li><li><a href=\"git_cheat_sheet\">git_cheat_sheet</a></li><li><a href=\"mysql_tutorial\">mysql_tutorial</a></li></ul>")))
 
 
 (deftest test-make-link
