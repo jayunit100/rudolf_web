@@ -1,16 +1,16 @@
 (ns rudolfweb.actions
-  (:use [hiccup.core          :as hc]) 
-  (:use [hiccup.form-helpers  :as hph])
-  (:require rudolfweb.tools)
-  (:use [clojure.data.json :only (read-json json-str)])
-  (:use [compojure.core    :only (defroutes GET)]) 
-  (:use ring.middleware.params)  ;; what does this do?  where is the online documentation?
-  (:require rudolfweb.blogtemplate)
-  (:require [compojure.route :as route]
-            [ring.util.response :as resp]))
+  (:require [hiccup.core            :as hc]) 
+  (:require [hiccup.form-helpers    :as hph])
+  (:require [rudolfweb.tools        :as rts])
+  (:require [clojure.data.json      :as json])
+  (:require [compojure.core         :as cc]) 
+  (:require [ring.middleware.params :as rmp])  ;; what does this do?  where is the online documentation?
+  (:require [rudolfweb.blogtemplate :as rbt])
+  (:require [compojure.route        :as route]
+            [ring.util.response     :as resp]))
 
 
-(defn layout 
+(defn home-layout 
   ""
   [title & body]
   [:html
@@ -25,10 +25,10 @@
 (defn rudolf-home
   "Home page"
   []
-  (layout 
+  (home-layout 
    "RudolF"
    [:ul 
-    (map #(vector :li [:a {:href (str "/" %)} %]) 
+    (map #(vector :li [:a {:href (str "/" %)} %])
          ["home" "blog/" "tools/"])]))
 
 
@@ -38,23 +38,28 @@
   [:html 
    [:body
     [:p "analysis results:"
-        [:pre (json-str (rudolfweb.tools/word-enrichment-url url))]]]])
+        [:pre (json/json-str (rts/word-enrichment-url url))]]]])
 
 
-(defroutes main-routes
-  (GET "/" [] 
+(cc/defroutes main-routes
+
+  (cc/GET "/" [] 
        (resp/redirect "/home"))
-  (GET "/home" [] 
+
+  (cc/GET "/home" [] 
        (hc/html (rudolf-home)))
-  (GET "/blog/" []                                   
+
+  (cc/GET "/blog/" []                                   
        (hc/html (rudolfweb.blogtemplate/index)))
-  (GET "/blog/:name" {params :params}                          ;; (may be) destructuring: the GET macro binds a map of parameters to params
+
+  (cc/GET "/blog/:name" {params :params}                       ;; (may be) destructuring: the GET macro binds a map of parameters to params
        (hc/html (rudolfweb.blogtemplate/post (params :name)))) ;; then we pull out the name and pass it to the blog page generator
-  (GET "/tools/" [] 
+
+  (cc/GET "/tools/" [] 
        (resp/redirect "/public/tools/index.html"))
   
   ;;word enrichment tool, takes a url as input, outputs word count as json
-  (GET "/tools/:wordenrichment_url" {params :params}
+  (cc/GET "/tools/:wordenrichment_url" {params :params}
        (hc/html (layout-word-enrichment (params :url))))
 
   (route/not-found 
