@@ -4,7 +4,6 @@
   (:require [rudolfweb.tools        :as rts])
   (:require [clojure.data.json      :as json])
   (:require [compojure.core         :as cc]) 
-  (:require [ring.middleware.params :as rmp])  ;; what does this do?  where is the online documentation?
   (:require [rudolfweb.blogtemplate :as rbt])
   (:require [compojure.route        :as route]
             [ring.util.response     :as resp]))

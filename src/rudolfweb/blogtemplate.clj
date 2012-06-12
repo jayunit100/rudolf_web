@@ -61,4 +61,4 @@
    (hph/doctype :html5)                   ;; want browsers in strict mode
    [:html header                          ;; the header should import stylesheets and scripts, if necessary
           [:body "Welcome to the blog!"
-                 body-header]]))
+                 (body-header ((read-articles-file) :articles))]]))
