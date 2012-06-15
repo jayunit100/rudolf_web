@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+ <head>
+  <title>My jQuery demo, version 0.01</title>
+  <meta content="RudolF" name="author" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="scripts/jquery1.7.2.js"></script>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+ </head>
+ <body>
+
+  <div id="container">
+   
+   <button id="unicornme">What happens if I click here ???</button>
+
+   <textarea id="mytext"></textarea>
+   
+   <button id="adder">Add some text before clicking me</button>
+   
+   <div id="divs"></div>
+   
+  </div>
+
+
+ <script type="text/javascript">
+
+
+
+ $(document).ready(function() {
+    "use strict"; // always a good habit -- disallows some of js's problematic, dark corners
+ 
+    var unis = 0,
+        divs = 0;
+
+    // $("#unicornme") means 'select the element(s) from the DOM with id='unicornme' (# means id) 
+    $("#unicornme").click(function() {
+        unis++;
+        $("#unicornme").text("omg " + unis + " unicorns should be on the screen!!"); 
+        // uh-oh !! this is defined in http://www.cornify.com/js/cornify.js
+        cornify_add();
+    });
+    
+    $("#adder").click(function() {
+      divs++;
+      // look -- I can add new elements to the DOM !
+      $("#divs").append("<div>" + divs + ": " + $("#mytext").val() + "</div>");
+      // remove the text from the textarea
+      $("#mytext").val("");
+    });
+
+ });
+
+</script>
+
+ </body>
+</html>

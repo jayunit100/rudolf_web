@@ -1,0 +1,28 @@
+html, body {
+
+}
+
+
+#container {
+  width: 960px;
+  padding: 5px;
+  height: 800px;
+  margin: 0px;
+}
+
+
+#divs {
+  height: 500px;
+  padding: 5px;
+  overflow: auto;
+  width: 440px;
+  border: dotted red 5px;
+  margin: 0px;
+}
+
+
+#divs > div {
+  height: 40px;
+  padding: 5px;
+  border: dotted gray 2px;
+}
