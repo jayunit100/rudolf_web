@@ -7,6 +7,7 @@
 [remote "origin"]
         url = git@github.com:jayunit100/rudolf_web.git
         fetch = +refs/heads/*:refs/remotes/origin/*
+
 [remote "heroku"]
         url = git@heroku.com:rudolfcode.git
         fetch = +refs/heads/*:refs/remotes/heroku/*
