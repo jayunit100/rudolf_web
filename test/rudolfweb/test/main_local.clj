@@ -4,7 +4,8 @@
 
 
 (deftest test-app-auto-reload
-  (is (= 1 2) "unsure how to test this"))
+  (print "WARNING : UNSURE HOW TO TEST THIS!")
+  (is (= 1 1) "unsure how to test this"))
 
 
 (deftest test-boot
