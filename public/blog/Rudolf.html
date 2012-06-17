@@ -9,6 +9,49 @@ Ring, Compojure, and Hiccup, to dynamically generate much of the content on this
 We build our tools in clojure, as server side functions, which may eventually be capable of running on 
 the client side via clojurescript.  
 
-Thanks for checking us out.  Come back soon. 
+</pre>
+
+<H1> How this site is deployed </H1> 
+
+<pre> 
+
+   This site is currently deployed in heroku.  One of our favorite things about heroku
+is that it is tightly integrated with Git.  
+
+One of the most important features of agile development is the notion of continuous deployment.  In order
+to make sure that all of our latest, coolest tricks are continually added and deployed to this site, we 
+utilize the https://github.com/ajlai/github-heroku-pusher, so that github deployements turn, automagically, 
+into site releases.  
+
+Here's how it works : 
+
+- Abstractly : First, you have to setup an "auto deployer" of sorts.  That is, some kind of a system 
+which is always "on", and which can receive github "post-receive" hooks.  That way, when you 
+push to github, this "system" will have a way of "knowing" that a change has happened.  Github
+post-receive hooks are quite simple -> you just add a URL  through the github UI, and the github server
+simply issues a post-request to that URL everytime that you push. 
+ 
+- Concretely : Set up a heroku application which is cloned from the abovementioned github project (github-heroku-pusher), and aAdd a post receive hook to github (these are called "WebHook URLS" in the admin interface), and all you have to do is add your "auto deployer" url, with a post-receive suffix.  For example : http://young-waterfall-6861.herokuapp.com/post-receive.  
+
+- Now, we develop some code, update a blog or article, and push it to github. Simple. 
+
+- Problems ? 
+
+Of course, like anything else in the cloud, this one is easy to muck up.
+
+This sort of hackery always leads to minor inconveniences.  Use "heroku logs" to solve the mystery !  Heroku logs is an AMAZING tool.  It simply 
+grabs all of the logs from the cloud and prints them out for you, locally.  In my case, I initially found that 
+
+2012-06-17T01:23:33+00:00 app[web.1]: /app/lib/init.rb:2:in `block in needs': ENV['HEROKU_USERNAME'] required (RuntimeError)
+
+Was being logged as an error, so when I tried to push changes, the post receive hook would work, but it wouldn't deploy the code.  This was of course an easy fix : 
+
+The fix : 
+
+jays-MacBook-Pro:github-heroku-pusher jayunit100$ heroku config:add HEROKU_USERNAME=jayunit100
+Setting config vars and restarting young-waterfall-6861... done, v8
+HEROKU_USERNAME: jayunit100
 
 </pre>
+
+
