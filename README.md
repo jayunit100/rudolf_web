@@ -29,16 +29,32 @@ A more "herokuish" way to run locally:
 * export PORT=8000 (read by Procfile deployer)
 * Run the "Procfile" (run the Procile launch command, in your terminal). 
 
-Run on Heroku
--------------
+Run as a new app on Heroku
+--------------------------
 First create a new app at Heroku with the cedar stack: 
 
     heroku create --stack cedar <my-app-name>
-
+  
 To run the webapp with Heroku we need the Procfile file and main-heroku.clj.
 
 [Example](http://blog.heroku.com/archives/2011/7/5/clojure_on_heroku/) of running (easy), note the Procfile is the "driver".
 
+
+Deployment to rudolfcode.heroku.com
+-----------------------------------
+
+First method
+
+- Certify your keys with heroku (email jay to add you to the heroku app authenticated users emails)
+- Install the heroku toolbelt. 
+- git remote add heroku git@heroku.com:appname.git
+--->  heroku add remote git@heroku.com:rudolfcode.git
+
+
+
+Automated method (beta)
+
+- Push to github (this is experimental, and underway, we will see if it works).
 
 Pushing and Pulling 
 -------------------
