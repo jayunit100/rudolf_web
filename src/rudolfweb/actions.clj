@@ -50,16 +50,17 @@
 
   (cc/GET "/blog/" []                                   
        (hc/html (rudolfweb.blogtemplate/index)))
-
+   
   (cc/GET "/blog/:name" {params :params}                       ;; (may be) destructuring: the GET macro binds a map of parameters to params
        (hc/html (rudolfweb.blogtemplate/post (params :name)))) ;; then we pull out the name and pass it to the blog page generator
 
   (cc/GET "/tools/" [] 
        (resp/redirect "/public/tools/index.html"))
-  
-  ;;word enrichment tool, takes a url as input, outputs word count as json
-  (cc/GET "/tools/:wordenrichment_url" {params :params}
-       (hc/html (layout-word-enrichment (params :url))))
+
+  (cc/GET "/tools/:wordenrichment_url" {params :params} 
+    [{:headers {"Content-Type" "text/plain"}}
+      (layout-word-enrichment (params :url)) ])
 
   (route/not-found 
        "<h1>Page not found</h1>"))
+  ;;end routes....
