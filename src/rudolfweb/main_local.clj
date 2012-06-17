@@ -15,5 +15,6 @@
    (wrap-reload '(rudolfweb.main-local rudolfweb.actions)) ; reload automatically
    (wrap-stacktrace)))    ; show stacktrace in browser when exceptions are thrown in the server
 
+(defn printme [] "you see me")
 (defn boot []
   (run-jetty #'app-auto-reload {:port 8080})) ; start Jetty webserver

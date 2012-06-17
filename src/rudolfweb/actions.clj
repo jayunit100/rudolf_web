@@ -18,7 +18,7 @@
            :href "style/home.css"
            :type "text/css"
            :media "all"}]
-   [:body [:h1.header title] body]])
+   [:body [:div {:class "main_menu"} [:h1 title]] body]])
 
 
 (defn rudolf-home
@@ -26,9 +26,11 @@
   []
   (home-layout 
    "RudolF"
-   [:ul 
-    (map #(vector :li [:a {:href (str "/" %)} %])
-         ["home" "blog/" "tools/"])]))
+   [:div {:class "main_menu"}    
+      [:ul 
+	      (map #(vector :li [:a {:href (str "/" %)} %])
+	         ["home" "blog/" "tools/"])]]
+   ))
 
 
 (defn layout-word-enrichment

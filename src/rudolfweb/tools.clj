@@ -19,5 +19,5 @@
    output: slurped url word count (see word-enrichment)"
   [str_in]
   {:pre [ (= (type str_in) (type ""))
-	  (.contains str_in "http:")]} ;;ghetto version of contains?
+	  (.contains str_in "http")]} ;;ghetto version of contains?
   (word-enrichment (slurp str_in)))
