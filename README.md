@@ -48,7 +48,7 @@ First method
 - Certify your keys with heroku (email jay to add you to the heroku app authenticated users emails)
 - Install the heroku toolbelt. 
 - git remote add heroku git@heroku.com:appname.git
---->  heroku add remote git@heroku.com:rudolfcode.git
+--->  git remote add git@heroku.com:rudolfcode.git
 
 
 
