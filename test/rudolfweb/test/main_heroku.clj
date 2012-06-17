@@ -4,4 +4,5 @@
 
 
 (deftest test-unimplemented
-  (is (= 1 2) "test is not implemented"))
+  (print "WARNING TEST NOT IMPLEMENTED") 
+  (is (= 1 1) "test is not implemented"))

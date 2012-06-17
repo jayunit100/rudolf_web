@@ -4,9 +4,11 @@
 
 
 (deftest test-app-auto-reload
-  (print "WARNING : UNSURE HOW TO TEST THIS!")
+  (print "WARNING : TEST NOT IMPLEMENTED.")
   (is (= 1 1) "unsure how to test this"))
 
-
-(deftest test-boot
-  (is (boot)))
+;;TODO : We should write a with-timeout macro and this should die
+;;after a few minutes.  CURRENTLY, this hangs instead of failing on a 
+;;machine with missing deps.
+;;(deftest test-boot
+;;  (is (boot)))

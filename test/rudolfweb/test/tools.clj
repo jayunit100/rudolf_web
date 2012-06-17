@@ -8,7 +8,6 @@
 (deftest snippet1
   (is (= 4 (count (cs/split "ABCAD ABBBBB ABCAD 12" #"\s+")))))
 
-
 (deftest snippet2
   (is (= 3 (count 
             (into {} 

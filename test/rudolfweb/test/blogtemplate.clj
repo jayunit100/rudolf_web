@@ -13,7 +13,6 @@
 (deftest read-article
   (is (> (count (bt/read-article "git_cheat_sheet")) 50)))
 
-
 (deftest test-can-find-all-articles
   (let [af (bt/read-articles-file)]
    (is (= (count af) 1))
