@@ -18,5 +18,5 @@
   "input: a string url 'http://www.google.com/a.csv'
    output: slurped url word count (see word-enrichment)"
   [str_in]
-  {:pre (= "http" (re-find #"http" str_in))} ;;ghetto version of contains?
+  {:pre (.contains str_in "http://")} ;;ghetto version of contains?
   (word-enrichment (slurp str_in)))
