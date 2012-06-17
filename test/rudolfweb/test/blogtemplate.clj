@@ -11,7 +11,7 @@
 
 
 (deftest read-article
-  (is (> (count (bt/read-article "git_cheat_sheet")) 50)))
+  (is (> (count (bt/read-article "mysql_tutorial")) 50)))
 
 (deftest test-can-find-all-articles
   (let [af (bt/read-articles-file)]
@@ -26,9 +26,11 @@
 (deftest test-index
   (is (> (count (bt/index)) 100)))
 
-
+;;This test pends that the mysql_tutorial actually exists and 
+;;should be written to span each of the existing articles. 
+;;It might be an example of over testing.
 (deftest test-post
-  (is (> (count (bt/post "mysql_tutorial")) 100)))
+  (is (> (count (bt/post "rudolf_architecture")) 100)))
 
 
 (deftest test-header
@@ -48,11 +50,13 @@
    (is (= :ul (get bh 0))))) ;; uh ... trying to get 0th element from bh
 
 
-(deftest test-body-header-html
-  (is (= (hc/html (bt/body-header ((bt/read-articles-file) :articles))) 
-         "<ul><li><a href=\"Rudolf\">Rudolf</a></li><li><a href=\"git_cheat_sheet\">git_cheat_sheet</a></li><li><a href=\"mysql_tutorial\">mysql_tutorial</a></li></ul>")))
 
+;;A bit of overtesting here.  We might want to limit it to only one blog.
+(deftest test-body-header-html
+  (let [str_articles_html (hc/html (bt/body-header ((bt/read-articles-file) :articles)))]
+    (is (.contains str_articles_html "rudolf_architecture"))
+    (is (.contains str_articles_html "mysql_tutorial"))
+    ))
 
 (deftest test-make-link
   (is (= 3 (count (bt/make-link "abcd")))))
-

@@ -4,7 +4,7 @@
 
 
 (deftest test-app-auto-reload
-  (print "WARNING : TEST NOT IMPLEMENTED.")
+  (print "WARNING :::::: TEST NOT IMPLEMENTED (we need a mock http test here - the server should be bootable.)")
   (is (= 1 1) "unsure how to test this"))
 
 ;;TODO : We should write a with-timeout macro and this should die

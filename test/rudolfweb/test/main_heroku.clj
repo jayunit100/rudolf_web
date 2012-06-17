@@ -2,7 +2,6 @@
   (:use clojure.test)
   (:use rudolfweb.main-heroku))
 
-
 (deftest test-unimplemented
-  (print "WARNING TEST NOT IMPLEMENTED") 
+  (print "Light warning ::: TEST NOT IMPLEMENTED (not sure if its possible to test heroku).") 
   (is (= 1 1) "test is not implemented"))
