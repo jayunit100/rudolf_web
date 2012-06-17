@@ -1,7 +1,7 @@
 The RudolF blog-algorithms-site-playground! 
      
 It uses 
-                        
+                              
  - Jetty (server), 
  - Ring (Http abstraction layer for simpler sites)
  - Compojure (Http forwarding and routing library) 
