@@ -29,9 +29,9 @@ Imports
 
  - don't use `:use` in the ns macro; use `:require` instead.  Rationale:  it's extremely hard to figure out where symbols are coming from if there's multiple libraries being `:used`.  Example:
 
-      (ns my.name.space
-        (:require [clojure.something  :as sthng])
-        ...)
+        (ns my.name.space
+          (:require [clojure.something  :as sthng])
+          ...)
 
 
 
@@ -40,12 +40,12 @@ Parentheses
 
  - closing ones shouldn't get their own line.  Example:
 
-      (+ 3 (- 1 2)
-         )
+        (+ 3 (- 1 2)
+           )
 
   is bad.  Better:
 
-      (+ 3 (- 1 2))
+        (+ 3 (- 1 2))
 
 
 
@@ -58,22 +58,22 @@ Nevertheless, some suggestions:
 
  - two spaces for "first" level, then one space thereafter
 
-      (defn 
-        [] ;; two spaces!!
-        (+ 3 2))
+        (defn 
+          [] ;; two spaces!!
+          (+ 3 2))
 
  - align items in the same list horizontally (if they're on separate lines)
 
-      (+
-       (* 1 2)
-       (* 3 4))
+        (+
+         (* 1 2)
+         (* 3 4))
 
 
 
 Comments
 ------
 
- - **don't put things in comments that belong in docstrings!!**
+ - **don't put things in comments that belong in docstrings!!**  Docstrings can be accessed interactively from the REPL; comments can not.
 
  - number of semicolons:  how many?  1?  2?
 
