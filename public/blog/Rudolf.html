@@ -1,57 +1,76 @@
-<h2>Our very first RudolF blog article</h2>
-
-<pre>
-
-Welcome to RudolF central, the hub for many of our experiments and musings.  
-The Rudolf central is written in Clojure, which continues to mesmerize us.  In particular, it uses
-Ring, Compojure, and Hiccup, to dynamically generate much of the content on this site.  
-
-We build our tools in clojure, as server side functions, which may eventually be capable of running on 
-the client side via clojurescript.  
-
-</pre>
-
-<H1> How this site is deployed </H1> 
-
-<pre> 
-
-   This site is currently deployed in heroku.  One of our favorite things about heroku
-is that it is tightly integrated with Git.  
-
-One of the most important features of agile development is the notion of continuous deployment.  In order
-to make sure that all of our latest, coolest tricks are continually added and deployed to this site, we 
-utilize the https://github.com/ajlai/github-heroku-pusher, so that github deployements turn, automagically, 
-into site releases.  
-
-Here's how it works : 
-
-- Abstractly : First, you have to setup an "auto deployer" of sorts.  That is, some kind of a system 
-which is always "on", and which can receive github "post-receive" hooks.  That way, when you 
-push to github, this "system" will have a way of "knowing" that a change has happened.  Github
-post-receive hooks are quite simple -> you just add a URL  through the github UI, and the github server
-simply issues a post-request to that URL everytime that you push. 
- 
-- Concretely : Set up a heroku application which is cloned from the abovementioned github project (github-heroku-pusher), and aAdd a post receive hook to github (these are called "WebHook URLS" in the admin interface), and all you have to do is add your "auto deployer" url, with a post-receive suffix.  For example : http://young-waterfall-6861.herokuapp.com/post-receive.  
-
-- Now, we develop some code, update a blog or article, and push it to github. Simple. 
-
-- Problems ? 
-
-Of course, like anything else in the cloud, this one is easy to muck up.
-
-This sort of hackery always leads to minor inconveniences.  Use "heroku logs" to solve the mystery !  Heroku logs is an AMAZING tool.  It simply 
-grabs all of the logs from the cloud and prints them out for you, locally.  In my case, I initially found that 
-
-2012-06-17T01:23:33+00:00 app[web.1]: /app/lib/init.rb:2:in `block in needs': ENV['HEROKU_USERNAME'] required (RuntimeError)
-
-Was being logged as an error, so when I tried to push changes, the post receive hook would work, but it wouldn't deploy the code.  This was of course an easy fix : 
-
-The fix : 
-
-jays-MacBook-Pro:github-heroku-pusher jayunit100$ heroku config:add HEROKU_USERNAME=jayunit100
-Setting config vars and restarting young-waterfall-6861... done, v8
-HEROKU_USERNAME: jayunit100
-
-</pre>
-
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 16.0px 0.0px; font: 36.0px Courier}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px Courier}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px Courier; min-height: 22.0px}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 36.0px Courier}
+  </style>
+</head>
+<body>
+<p class="p1"><b>We finally decided on a site architecture !<span class="Apple-converted-space"> </span></b></p>
+<p class="p2">Welcome to RudolF central, the hub for our experiments. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The most significant of all such experiments, at this point, is this site itself ! <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">It is our first, production scale Clojure web application.<span class="Apple-converted-space">  </span>Additionally, it is a dynamic blog generator, which is auto deployed via Github Service hooks onto Heroku on the cloud. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This also hosts our "Tools", which are a set of simple web services and applications which are (hopefully) both fun as well as (in some cases) quite useful informatics tools.<span class="Apple-converted-space">  </span>We envision these to grow along side the needs of our projects.</p>
+<p class="p3"><br></p>
+<p class="p4"><b>Bird's Eye View of the Technology</b></p>
+<p class="p3"><br></p>
+<p class="p2">We build our tools in java, clojure, and python.<span class="Apple-converted-space">  </span>In particular, this site is built as a JVM app that runs on Clojure on Heroku.<span class="Apple-converted-space">  </span>Our tools are mostly server side Clojure functions, which may eventually be capable of running on the client side (via ClojureScript, for example). <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p4"><b>Frameworks, Frameworks, Frameworks<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><b></b><br></p>
+<p class="p2">Of course, nobody develops web apps without a zillion frameworks nowadays, and RudolF is no exception!<span class="Apple-converted-space">  </span>The Rudolf site is written in Clojure.<span class="Apple-converted-space">  </span>In particular, it uses Ring, Compojure, and Hiccup, to dynamically generate much of the content on this site, and is heavily based off of a Fork (https://github.com/jayunit100/Clojure-Webapp-Example) of Stefan Rock's Clojure web app example. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p4"><b>Deployment</b></p>
+<p class="p3"><br></p>
+<p class="p2">This site is currently deployed in heroku.<span class="Apple-converted-space">  </span>One of our favorite things about heroku is that it is tightly integrated with Git. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">One of the most important features of agile development is the notion of continuous deployment.<span class="Apple-converted-space">  </span>In order to make sure that all of our latest, coolest tricks are continually added and deployed to this site, we utilize the https://github.com/ajlai/github-heroku-pusher, so that github deployments turn, automagically, into site releases. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">Here's how it works :<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">- Abstractly : First, you have to setup an "auto deployer" of sorts.<span class="Apple-converted-space">  </span>That is, some kind of a system which is always "on", and which can receive github "post-receive" hooks.<span class="Apple-converted-space">  </span>That way, when you push to github, this "system" will have a way of "knowing" that a change has happened.<span class="Apple-converted-space">  </span>Github post-receive hooks are quite simple -&gt; you just add a URL<span class="Apple-converted-space">  </span>through the github UI, and the github server simply issues a post-request to that URL everytime that you push.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<p class="p2">- Concretely : Set up a heroku application which is cloned from the abovementioned github project (github-heroku-pusher), and aAdd a post receive hook to github (these are called "WebHook URLS" in the admin interface), and all you have to do is add your "auto deployer" url, with a post-receive suffix.<span class="Apple-converted-space">  </span>For example : http://young-waterfall-6861.herokuapp.com/post-receive. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">- Now, we develop some code, update a blog or article, and push it to github. Simple.<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p4"><b>- What if it doesn't work ?<span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><br></p>
+<p class="p2">Of course, like anything else in the cloud, this one is easy to muck up. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">This sort of hackery always leads to minor inconveniences.<span class="Apple-converted-space">  </span>Use "heroku logs" to solve the mystery !<span class="Apple-converted-space">  </span>Heroku logs is an AMAZING tool.<span class="Apple-converted-space">  </span>It simply grabs all of the logs from the cloud and prints them out for you, locally.<span class="Apple-converted-space">  </span>In my case, I initially found that<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">2012-06-17T01:23:33+00:00 app[web.1]: /app/lib/init.rb:2:in `block in needs': ENV['HEROKU_USERNAME'] required (RuntimeError)</p>
+<p class="p3"><br></p>
+<p class="p2">Was being logged as an error, so when I tried to push changes, the post receive hook would work, but it wouldn't deploy the code.<span class="Apple-converted-space">  </span>This was of course an easy fix :<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2">The fix :<span class="Apple-converted-space"> </span></p>
+<p class="p3"><i></i><br></p>
+<p class="p2"><i>jays-MacBook-Pro:github-heroku-pusher jayunit100$ heroku config:add HEROKU_USERNAME=jayunit100</i></p>
+<p class="p2"><i>Setting config vars and restarting young-waterfall-6861... done, v8</i></p>
+<p class="p2"><i>HEROKU_USERNAME: jayunit100</i></p>
+<p class="p3"><i></i><br></p>
+<p class="p2"><b>- Whats next ? <span class="Apple-converted-space"> </span></b></p>
+<p class="p3"><b></b><br></p>
+<p class="p2">Stay in touch : jayunit100@gmail.com.<span class="Apple-converted-space">  </span>Let me know whats on your mind.<span class="Apple-converted-space">  </span>Especially if you are interested in learning more about the Machine learning, Bioinformatics, the JVM, functional programming, virtualization, and Heroku / AWS / GAE.<span class="Apple-converted-space">  </span>We are a polyglot group of developers and we like to play with all sorts of emerging technologies, especially ones that allow us to efficiently solve difficult, interesting problems.<span class="Apple-converted-space">  </span>While we continue working on the site, you can also checkout our respective personal blogs :<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2"><b>-&gt; http://jayunit100.blogspot.com</b></p>
+<p class="p3"><br></p>
+<p class="p2">Jay's blog largely focuses on concrete tutorials and tidbits explicating the cream-of-the-crop of<span class="Apple-converted-space">  </span>technologies that are driving the open-source communities modern, break-neck productivity.<span class="Apple-converted-space">  </span>You will find articles about Clojure, Vagrant, and a lot of palaver regarding the Jay's JVM hammer-of-the-day. <span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p2"><b>-&gt; http://mfenwick100.blogspot.com</b></p>
+<p class="p3"><br></p>
+<p class="p2">Matt's blog is relatively new, focusing largely on concrete aspects of software development that he encounters in his day to day research as a graduate student studying … data processing … Although Jay believes that Jay's blog is significantly better than Matt's, Jay admits that Matt's recent MySQL tutorial was pretty badass. <span class="Apple-converted-space"> </span></p>
+</body>
+</html>
