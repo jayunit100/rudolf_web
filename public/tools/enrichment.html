@@ -36,8 +36,8 @@ function displayEnrichment(results) {
 }
 
 
-function onError(resp) {
-  alert("sorry, it didn't work: " + JSON.stringify(resp));
+function onError(resp, message) {
+  alert("sorry, it didn't work: " + JSON.stringify([resp, message]));
 }
 
 
@@ -53,7 +53,7 @@ function onError(resp) {
             data:      {'url': myurl},
             success:   displayEnrichment,
             error:     onError,  // if the http request fails
-            timeout:   2000 // is this long enough?
+            timeout:   4000 // is this long enough?
         });
     });
 
