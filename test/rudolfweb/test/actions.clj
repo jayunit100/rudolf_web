@@ -1,13 +1,16 @@
 (ns rudolfweb.test.actions
   (:use clojure.test)
   (:require [hiccup.core        :as  hc])
-  (:require [rudolfweb.actions  :as  ra]))
+  (:require [rudolfweb.actions  :as  ra])
+  (:require [clojure.data.json      :as json]))
 
-
+;;TODO verify that this is valid json
 (deftest test-layout-word-enrichment
   (let [layout (ra/layout-word-enrichment "http://www.google.com")]
-   (is (= 3 (count layout)) )
-   (is (= :html (get layout 0)))))
+   (is (map? (json/read-json layout)))
+   (is (< 10000 (count layout)) ) ;;Expect more then 10,000 chars.
+   (is (.contains layout "google"))
+   ))
 
 
 (deftest test-home-layout
