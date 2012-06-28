@@ -19,8 +19,7 @@ Get Started By running locally
 
 * and from the repl:
 
-        ;;WARNING : not (:use ...) != (use .. ) !!!!
-        user=> (:use 'rudolfweb.main-local) 
+        user=> (use 'rudolfweb.main-local) 
         user=> (boot) 
 
 * Finally : Open [the page](http://localhost:8080) in your web browser: you should see a welcome message. For other URLs to try take a look at util.clj.
