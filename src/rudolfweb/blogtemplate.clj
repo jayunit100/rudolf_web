@@ -23,7 +23,7 @@
   
 
 (def footer 
-  [:sub "This post brought to you by RudolF Inc"])
+  "This post brought to you by RudolF Inc")
 
 
 (def header
@@ -49,10 +49,17 @@
    (hph/doctype :html5)                   ;;  want browsers in strict mode
    [:html header                          ;;  the header should import stylesheets and scripts, if necessary
           [:body 
-           (body-header ((read-articles-file) :articles))  ;;  the "body-header" should include a list of all posts
-                 (try (read-article name)      ;;  the body consists of the text of the post ... need to check that the yaml file says it's okay
-                      (catch Exception e (str "<p>error: (" name ") is an invalid blog post name</p>")))
-                 footer]]))               ;;  plus a generic footer
+           [:div {:id "banner"}
+                 [:div "RudolF blog"]]
+           [:div {:id "main"}
+             [:div {:id "sidebar"}          ;;  the "body-header" should include a list of all posts
+               [:div (body-header ((read-articles-file) :articles))]]
+             [:div {:id "content"}          ;;  the body consists of the text of the post
+               [:div (try (read-article name) ;;  need to check that the yaml file says it's okay
+                         (catch Exception e (str "<p>error: (" name ") is an invalid blog post name</p>")))]]
+             [:div {:id "main-footer"}]]
+           [:div {:id "footer"}
+             [:div footer]]]]))       ;;  plus a generic footer
 
 
 (defn index

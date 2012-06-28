@@ -1,8 +1,49 @@
 
-html, body {
-  height: 100%;
-  width: 100%;
+
+#banner > div, #sidebar > div, #content > div, #footer > div {
+	border: solid blue 2px;
+	padding: 10px;
 }
+
+
+#banner {
+	font-size: 400%;
+	text-align: center;
+}
+
+#main {
+
+}
+
+#sidebar {
+	width: 20%;
+	overflow: auto;
+	float: left;
+	height: 100%;
+}
+
+#content {
+	width: 80%;
+	overflow: auto;
+	float: left;
+	height: 100%;
+}
+
+#main-footer {
+	clear: both;
+}
+
+#footer {
+	font-size: 75%;
+	text-align: center;
+}
+
+
+#content > div {
+	padding: 10px;
+	
+}
+
 
 .code {
   color: blue;
