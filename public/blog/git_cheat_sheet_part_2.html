@@ -1,0 +1,85 @@
+<p>In this second part of the article, we'll see more of the git commands
+that I find most useful, covering remotes, tags, and rebasing:</p>
+
+
+<h2>Remote</h2>
+<pre class="code">
+# see remotes
+git remote -v
+
+# make a new remote
+git remote add [name] [location]
+
+# get data from a remote -- everything that you don't yet have locally
+git fetch [remote]
+
+# show info about a remote
+git remote show [remote]
+
+# rename a remote (i.e. change the local alias -- doesn't change anything on the actual remote server)
+#   also renames remote branch names
+git remote rename [old] [new]
+ 
+# remove a remote
+git remote rm [remote]
+</pre>
+
+
+<h2>Tags</h2>
+<pre class="code">
+# see all tags
+git tag
+
+# see tags matching a pattern
+#   this doesn't seem to work
+git tag -l [pattern]
+
+# make a lightweight tag
+git tag [tagname]
+
+# make an annotated tag
+#   what does '-a' do?
+git tag -a [tagname] -m 'commit message'
+ 
+# show a single tag
+git show [tagname]
+
+# make a signed tag
+git tag -s [tagname] -m 'commit message'
+
+# verify a signed tag
+#   need signer's public key ... somewhere?  in keyring?
+git tag -v [tagname]
+ 
+# make a tag of a previous commit
+git tag -a [tagname] [commit's sha-1 checksum]
+
+# push one tag to a remote
+git push [remote] [tagname]
+
+# push all tags to a remote
+git push [remote] --tags
+</pre>
+
+
+<h2>Rebasing</h2>
+<pre class="code">
+# rebase the current branch onto another branch
+git rebase [base-branch]
+
+# rebase a branch onto another branch
+git rebase [base-branch] [rebasee-branch]
+
+# typical rebasing workflow:
+#   switch to rebasee
+git checkout [rebasee-branch]
+#   put rebasee on base
+git rebase [base-branch]
+#   switch to base
+git checkout [base-branch]
+#   fast-forward merge rebasee into base 
+git merge [rebasee-branch]
+
+# more complicated rebase ... don't understand it
+git rebase --onto [base-branch] [upstream-branch] [rebasee-branch]
+</pre>
