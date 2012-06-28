@@ -15,7 +15,6 @@
   [url]
   (json/json-str (rts/word-enrichment-url url)))
 
-
 (cc/defroutes main-routes
 
   (cc/GET "/" [] 
