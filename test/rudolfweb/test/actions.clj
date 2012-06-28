@@ -6,7 +6,7 @@
 
 (deftest test-layout-word-enrichment
   (let [layout (ra/layout-word-enrichment "http://www.google.com")]
-   (is (= 2 (count layout)))
+   (is (= 3 (count layout)) )
    (is (= :html (get layout 0)))))
 
 

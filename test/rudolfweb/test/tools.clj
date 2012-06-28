@@ -17,8 +17,10 @@
 (deftest test-word-enrichment
   (is 
    (= 
-     (word-enrichment "a s v a a asdg asdg asdg")
-     {"a" 3, "s" 1, "asdg" 3, "v" 1})))
+     (word-enrichment 
+       "a s v a a asdg asdg asdg")
+       {"" 1, " " 7, "a" 3, "s" 1, "asdg" 3, "v" 1}
+     )))
 
 
 (deftest test-word-enrichment-url
