@@ -9,29 +9,6 @@
             [ring.util.response     :as resp]))
 
 
-(defn home-layout 
-  ""
-  [title & body]
-  [:html
-   [:head [:title title]]
-   [:link {:rel "stylesheet"
-           :href "style/home.css"
-           :type "text/css"
-           :media "all"}]
-   [:body [:div {:class "main_menu"} [:h1 title]] body]])
-
-
-(defn rudolf-home
-  "Home page"
-  []
-  (home-layout 
-   "RudolF"
-   [:div {:class "main_menu"}    
-      [:ul 
-	      (map #(vector :li [:a {:href (str "/" %)} %])
-	         ["home" "blog/" "tools/"])]]
-   ))
-
 ;;This is made to look the same way facebook jsons look, they 
 ;;are preformatted html (not plain text).
 (defn layout-word-enrichment
@@ -46,7 +23,7 @@
        (resp/redirect "/home"))
 
   (cc/GET "/home" [] 
-       (hc/html (rudolf-home)))
+       (resp/redirect "/homepage/Home.html"))
 
   (cc/GET "/blog/" []                                   
        (hc/html (rudolfweb.blogtemplate/index)))
