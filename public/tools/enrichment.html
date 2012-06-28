@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+ <head>
+  <title>My word enrichment calculator</title>
+  <meta content="RudolF" name="author" />
+
+  <script type="text/javascript" src="scripts/jquery1.7.2.js"></script>
+ </head>
+ <body>
+
+  <div id="input">
+
+    enter url here:
+   <textarea id="url"></textarea>
+   
+   <button id="calculate">Click here to analyze url</button>
+   
+  </div>
+
+  <div id="output">
+   <table id="enrichments">
+   </table>
+  </div>
+
+
+ <script type="text/javascript">
+
+
+function displayEnrichment(results) {
+  var tab = $("#enrichments");
+  tab.empty();
+  tab.append("<tr><th>word</th><th>enrichment</th></tr>");
+  for(var i in results) {
+    tab.append("<tr><td>" + i + "</td><td>" + results[i] + "</td></tr>");
+  }
+}
+
+
+function onError(resp) {
+  alert("sorry, it didn't work: " + JSON.stringify(resp));
+}
+
+
+ $(document).ready(function() {
+    "use strict";
+    
+    $("#calculate").click(function() {
+        var myurl = $("#url").val();
+        $.ajax({
+            url:       'http://rudolfcode.herokuapp.com/tools/wordenrichment_url', 
+            type:      'GET',
+            dataType:  'json',
+            data:      {'url': myurl},
+            success:   displayEnrichment,
+            error:     onError,  // if the http request fails
+            timeout:   2000 // is this long enough?
+        });
+    });
+
+ });
+
+</script>
+
+ </body>
+</html>
