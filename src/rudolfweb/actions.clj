@@ -8,14 +8,12 @@
   (:require [compojure.route        :as route]
             [ring.util.response     :as resp]))
 
-
 ;;This is made to look the same way facebook jsons look, they 
 ;;are preformatted html (not plain text).
 (defn layout-word-enrichment
   ""
   [url]
   (json/json-str (rts/word-enrichment-url url)))
-
 
 
 (cc/defroutes main-routes
