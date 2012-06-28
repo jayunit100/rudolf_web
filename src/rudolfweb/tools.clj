@@ -7,7 +7,7 @@
    output: a map : {'a' 1 'b' 2}"
   [str_in] 
   {:pre [(= (type str_in) (type ""))]}
-  (let [all (cs/split str_in #"\s+")]
+  (let [all (cs/split str_in #"\b+")]
     (into {}
           (for [unique_word (set all)]
             [unique_word 

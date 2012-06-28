@@ -32,15 +32,18 @@
 	         ["home" "blog/" "tools/"])]]
    ))
 
-
+;;This is made to look the same way facebook jsons look, they 
+;;are preformatted html (not plain text).
 (defn layout-word-enrichment
   ""
   [url]
   [:html 
-   [:body
-    [:p "analysis results:"
-        [:pre (json/json-str (rts/word-enrichment-url url))]]]])
-
+   [:head] ; <head></head>
+   [:body  ; <body>  
+        [:pre 
+           (.replaceAll ;;ghetto replacement of ,
+             (json/json-str (rts/word-enrichment-url url)) "," ",\n")
+         ]]])
 
 (cc/defroutes main-routes
 
