@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Rudolf</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<script src="https://www.google.com/jsapi"></script>
+<script>
+    google.load('jquery', '1.7.0');
+</script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="wrapper-bgtop">
+        <div id="wrapper-bgbtm">
+        
+            <div id="header">
+                <div id="logo">
+                    <h1><a href="Home.html">Rudolf</a></h1>
+                    <p> </p>
+                </div>
+            </div>
+            
+            <div id="menu">
+                <ul>
+                    <li><a href="Home.html" accesskey="1" title="Home"><span>Home</span></a></li>
+                    <li><a href="Tools.html" accesskey="2" title="Tools"><span>Tools</span></a></li>
+                    <li class="active"><a href="Blog.html" accesskey="3" title="Blog"><span>Blog</span></a></li>
+                </ul>
+            </div>
+            
+            <div id="page">
+                <div id="content">
+                <H1>This is our blog page</H1>
+                	<H2>
+                		One of the most important things we do is research : Research into solving problems, both meaningless and pragmatic.  Checkout our personal blogs as well, 
+                	which are quite diverse. 
+                	</H2>
+                    <div id="blog" class="post">
+                        <h2 class="title">Blog</h2>
+                        <div id="entry" class="entry">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="sidebar">
+                    <div>
+                        <h2 class="title">Links</h2>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div id="footer" class="container">
+Thanks for visiting RudolF.  Contact jayunit100@rudolflabs.com for more info.
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#blog").load("/blog/");
+});
+</script>
+
+
+</body>
+</html>
