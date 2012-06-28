@@ -41,7 +41,7 @@ contribute to the executable code</p></li>
 </ol><p>For the rest of this article, we'll use this simple example to demonstrate
 import concepts:</p>
 
-<pre><code>(define x "hi")
+<pre class="code"><code>(define x "hi")
 </code></pre>
 
 <h3>
@@ -49,7 +49,7 @@ import concepts:</p>
 
 <p>Here are Beagle's token definitions:</p>
 
-<pre><code>STRING:         "[^\"]*"
+<pre class="code"><code>STRING:         "[^\"]*"
 
 SYMBOL:         [^;\"\(\)\s]+
 
@@ -70,7 +70,7 @@ of tokens.  So, using the above token definitions, we'll go through the string
 
 <p>As it happens, there are 7 tokens:</p>
 
-<pre><code>['(', 'define', ' ', 'x', ' ', '"hi"', ')']
+<pre class="code"><code>['(', 'define', ' ', 'x', ' ', '"hi"', ')']
 </code></pre>
 
 <p>But how do we get that answer?</p>
@@ -95,7 +95,7 @@ a string.</p>
 useful to a tool that generates web-based documentation from a source code file, for
 instance), so let's get rid of them, leaving us with these tokens:</p>
 
-<pre><code>["(", "define", "x", "4", ")"]
+<pre class="code"><code>["(", "define", "x", "4", ")"]
 </code></pre>
 
 <h3>
@@ -103,7 +103,7 @@ instance), so let's get rid of them, leaving us with these tokens:</p>
 
 <p>In this step, we assemble the tokens according to our grammar, which is:</p>
 
-<pre><code>BeagleCode:     SExpression(+)
+<pre class="code"><code>BeagleCode:     SExpression(+)
 
 SExpression:    Atom  |  List
 
@@ -122,7 +122,7 @@ of s-expressions (so the grammar is recursive).</p>
 <p>We can match this grammar to our tokens using a strategy called "recursive descent".
 Let's try it ourselves:</p>
 
-<pre><code>1. try BeagleCode
+<pre class="code"><code>1. try BeagleCode
  2. try SExpression
   3. try Atom
    4. try STRING ... failed
@@ -154,7 +154,7 @@ Let's try it ourselves:</p>
 
 <p>Cool, it worked!  Our parse tree now looks like: </p>
 
-<pre><code>list: 
+<pre class="code"><code>list: 
   symbol: define 
   symbol: x 
   string: hi

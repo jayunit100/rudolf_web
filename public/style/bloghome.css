@@ -1,24 +1,31 @@
 
+html, body {	
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
 
 #banner > div, #sidebar > div, #content > div, #footer > div {
-	border: solid blue 2px;
 	padding: 10px;
 }
 
 
 #banner {
+	background-color: #AFEEEE;
 	font-size: 400%;
 	text-align: center;
+	height: 10%;
 }
 
 #main {
-
+	height: 85%;
 }
 
 #sidebar {
 	width: 20%;
 	overflow: auto;
 	float: left;
+	background-color: #ABABAB;
 	height: 100%;
 }
 
@@ -26,6 +33,7 @@
 	width: 80%;
 	overflow: auto;
 	float: left;
+	background-color: #eedd82;
 	height: 100%;
 }
 
@@ -36,6 +44,9 @@
 #footer {
 	font-size: 75%;
 	text-align: center;
+	background-color: #f5deb3;
+	height: 5%;
+	background-color: #AFEEEE;
 }
 
 
@@ -46,11 +57,15 @@
 
 
 .code {
-  color: blue;
-  background-color: #cdc9c9;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC;
+  font-size: 13px;
+  line-height: 19px;
   overflow: auto;
-  padding: 10px;
+  padding: 6px 10px;
+  font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace;
 }
+
 
 .box {
   background-color: black;
