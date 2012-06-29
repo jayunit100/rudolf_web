@@ -1,12 +1,14 @@
 (ns rudolfweb.blogtemplate
-  (:require [hiccup.core          :as hc])
-  (:require [hiccup.page-helpers  :as hph])
-  (:require [clj-yaml.core        :as yaml]))
+  (:require [hiccup.core            :as hc])
+  (:require [hiccup.page-helpers    :as hph])
+  (:require [clojure.contrib.string :as cs])
+  (:require [clj-yaml.core          :as yaml]))
 
 
 (defn make-link
   [name]
-  [:a {:href (str "/blog/" name)} name])
+  [:a {:href (str "/blog/" name)} 
+      (cs/join " " (map cs/capitalize (cs/split #"_" name)))])
 
 
 (defn read-articles-file
