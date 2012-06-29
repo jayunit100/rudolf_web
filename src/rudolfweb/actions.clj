@@ -21,7 +21,7 @@
        (resp/redirect "/home"))
 
   (cc/GET "/home" [] 
-       (resp/redirect "/homepage/Home.html"))
+       (resp/redirect "Home.html"))
 
   (cc/GET "/blog/" []                                   
        (hc/html (rudolfweb.blogtemplate/index)))
