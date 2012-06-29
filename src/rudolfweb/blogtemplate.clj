@@ -19,7 +19,7 @@
   ""
   [article-names]
   [:ul (for [art-name article-names]
-            [:li (make-link art-name)])])
+            [:li (make-link (str "/blog/" art-name))])])
   
 
 (def footer 
