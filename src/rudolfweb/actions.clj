@@ -20,7 +20,7 @@
   (cc/GET "/" [] 
        (resp/redirect "/index.html"))
 
-  (cc/GET "/home" [] 
+  (cc/GET "/home/" [] 
        (resp/redirect "Home.html"))
 
   (cc/GET "/blog/" []                                   
