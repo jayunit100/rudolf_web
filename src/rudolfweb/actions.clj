@@ -18,13 +18,13 @@
 (cc/defroutes main-routes
 
   (cc/GET "/" [] 
-       (resp/redirect "/home"))
+       (resp/redirect "/index.html"))
 
   (cc/GET "/home" [] 
        (resp/redirect "Home.html"))
 
   (cc/GET "/blog/" []                                   
-       (hc/html (rudolfweb.blogtemplate/index)))
+       (hc/html (rudolfweb.blogtemplate/post "x")))
 
   (cc/GET "/blog/:name" {params :params}                       ;; (may be) destructuring: the GET macro binds a map of parameters to params
        (hc/html (rudolfweb.blogtemplate/post (params :name)))) ;; then we pull out the name and pass it to the blog page generator
