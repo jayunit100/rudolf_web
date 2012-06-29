@@ -11,6 +11,11 @@
 	background: #fff;
 	color: #000;
 	font: 100%/1 Arial, Helvetica, sans-serif;
+    padding: 0;
+    width: 35;
+    margin-left: auto;
+    margin-right: auto;
+    // border: ...
 }
 
 table.teamdata {
@@ -29,7 +34,7 @@ table.teamdata th {
 }
 table.teamdata td {
 	border-width: 1px;
-	padding: 30px;
+	padding: 20px;
 	border-style: solid;
 	border-color: white;
 	background-color: ;
@@ -39,11 +44,8 @@ table.teamdata td {
 /* Positioning and dimensions */
 
 #logo {
+	align:center;
 	padding: 1em;
-}
-
-#logo h1, #logo h2 {
-	margin: 0;
 }
 
 #logo h1 {
@@ -51,7 +53,7 @@ table.teamdata td {
 }
 
 #logo h1 span {
-	float: left;
+	float: center; /** This is how we get a centered log **/
 	height: 100%;
 }
 
@@ -82,47 +84,48 @@ table.teamdata td {
 
 
   <div id="logo">
-	<h1>
+	<h1 align="center">
 		<span id="css">R</span>
 		<span id="day">udolF</span>
-		<a style="display:block" href="mailto:jayunit100@rudolflabs.com,jayunit100@gmail.com?Subject=Dear-RudolF">contact</a>
-		<a href="https://github.com/jayunit100/RudolF">sandbox</a><BR>
-		<a style="display:block" href="/home/">labs</a>
 	</h1>
 
-	<TABLE class="teamdata" BORDER="6">
+	<TABLE align="center" class="teamdata" BORDER="6">
     <THEAD>
 	<TR>
     <TH><h2></h2></TH>    <TH><h2>jayunit100</h2></TH> <TH><h2>fenwick et al.</h2></TH> <TH><h2>rudolf</h2></TH>
     </TR>
     </THEAD>
 	<TR>
-	<TD><H2><b>code</b></H2></TD>
-	<TD>
-		<a href="http://github.com/jayunit100">GitHub</a><br> 
-		<a href="http://jayworkoutgenerator.appspot.com">Workoutgenerator</a><br>
-		<a href="http://jimpactfactor.appspot.com">Impact factor</a><br>
-		<a href="http://bio-toolkit.org">bioinformatics</a><br>
-		<a href="http://www.peerindex.com">Peerindex</a><br>
+	<TD align="center"><H2><b>code :</b></H2></TD>
+	<TD align="center">
+		<a href="http://github.com/jayunit100">github</a><br> 
+		<a href="http://jayworkoutgenerator.appspot.com">jworkoutgenerator</a><br>
+		<a href="http://jimpactfactor.appspot.com">j Impact factor</a><br>
+		<a href="http://bio-toolkit.org">bioinformatics@biotoolkit.org</a><br>
+		<a href="http://www.peerindex.com">peerindex.com</a><br>
 	</TD>
-	<TD>
-	    <a href="https://github.com/mattfenwick">GitHub</a><BR>
+	<TD align="center">
+	    <a href="https://github.com/mattfenwick">github</a><BR>
 	    <a href="http://www.connjur.org">The Connjur Project</a>  
 	</TD>
-	<TD>
+	<TD align="center">
 		<a href="https://github.com/jayunit100/RudolF">RudolF Sandbox</a><BR>
 		<a href="https://github.com/jayunit100/rudolf_dev">Rudolf VM (vagrant)</a><BR>
 		<a href="https://github.com/jayunit100/rudolf_web">This site</a><BR>
 	</TD>
 	</TR>
 	<TR>
-	<TD><h2>blog</h2></TD>
-   	<TD><a href="http://jayunit100.blogspot.com">Domain-driven engineering.</a></TD>
-	<TD><a href="http://mfenwick100.blogspot.com/">Functional Programming</a> </TD>
-    <TD colspan="3"><a href="http://rudolflabs.com/home/">Rudolf.BlogEngine</a> </TD>
+	<TD><h2>blog : </h2></TD>
+   	<TD align="center"><a href="http://jayunit100.blogspot.com">domain-driven engineering</a></TD>
+	<TD align="center"><a href="http://mfenwick100.blogspot.com/">functional programming</a> </TD>
+    <TD colspan="3" align="center"><a href="http://rudolflabs.com/home/">rudolf.blogengine</a> </TD>
     </TR>
 	</TABLE>
     <BR></BR>
+
+	<H1 align="center">
+			<a style="display:block" href="mailto:jayunit100@rudolflabs.com,jayunit100@gmail.com?Subject=Dear-RudolF">contact</a>
+	</H1>
   </div>
 
 </body>
