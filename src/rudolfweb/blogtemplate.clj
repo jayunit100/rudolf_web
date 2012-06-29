@@ -6,7 +6,7 @@
 
 (defn make-link
   [name]
-  [:a {:href name} name])
+  [:a {:href (str "/blog/" name)} name])
 
 
 (defn read-articles-file

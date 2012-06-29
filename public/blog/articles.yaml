@@ -1,6 +1,7 @@
 articles:
- - /blog/rudolf_blog_ui
- - /blog/rudolf_architecture
- - /blog/git_cheat_sheet
- - /blog/mysql_tutorial
- - /blog/beagle_parsing
+ - rudolf_blog_ui
+ - rudolf_architecture
+ - git_cheat_sheet_part_1
+ - git_cheat_sheet_part_2
+ - mysql_tutorial
+ - beagle_parsing
