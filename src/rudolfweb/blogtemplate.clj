@@ -6,7 +6,7 @@
 
 (defn make-link
   [name]
-  [:a {:href name} name])
+  [:a {:href (str "/blog/" name)} name])
 
 
 (defn read-articles-file
@@ -19,7 +19,7 @@
   ""
   [article-names]
   [:ul (for [art-name article-names]
-            [:li (make-link (str "/blog/" art-name))])])
+            [:li (make-link art-name)])])
   
 
 (def footer 
