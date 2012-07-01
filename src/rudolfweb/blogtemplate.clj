@@ -18,7 +18,8 @@
 
 
 (defn body-header
-  ""
+  "INPUT : A list of Article names 
+   OUTPUT : A map of article names defining an html list <ul>."
   [article-names]
   [:ul (for [art-name article-names]
             [:li (make-link art-name)])])

@@ -9,5 +9,5 @@
 (deftest test-layout-word-enrichment
   (let [layout (ra/layout-word-enrichment "http://www.google.com")]
    (is (map? (json/read-json layout)))
-   (is (< 9000 (count layout)))
+   (is (< 5000 (count layout)))
    (is (.contains layout "google"))))

@@ -33,21 +33,21 @@
   (is (> (count (bt/post "rudolf_architecture")) 100)))
 
 
-(deftest test-header
-  (is (= 6 (count bt/header))))
-
-
-(deftest test-footer
-  (is (= 2 (count bt/footer))))
-
+(deftest test-header-and-footer
+  (is (.contains (str bt/header) "RudolF"))
+  (is (.contains bt/footer "RudolF")))
 
 (deftest test-body-header
-  (let [bh (bt/body-header ["abc" "def" "ghi"])]
-   (is (= 3 (count (get bh 1))))
-   (is (= bh [:ul (list [:li [:a {:href "abc"} "abc"]] 
-                        [:li [:a {:href "def"} "def"]] 
-                        [:li [:a {:href "ghi"} "ghi"]])])) 
-   (is (= :ul (get bh 0))))) ;; uh ... trying to get 0th element from bh
+  (let [bh (bt/body-header ["article1" "article2"])]
+    (is (= 2 (count (get bh 1))))
+    (is (.contains (str bh) "article1")) 
+    (is (.contains (str bh) "article2"))
+    (is (.contains (str bh) "ul"))
+    ;;We want to see the :li element twice, once for each article
+    ;;We might not need to test the exact html format...
+    (is (= 2 
+           (count (filter (fn li [t] (.contains (str t) "li")) (nth bh 1)))))
+    (is (= :ul (get bh 0))))) ;; uh ... trying to get 0th element from bh
 
 
 
