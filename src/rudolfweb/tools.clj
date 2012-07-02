@@ -7,15 +7,13 @@
    output: a map : {'a' 1 'b' 2}"
   [str_in] 
   {:pre [(= (type str_in) (type ""))]}
-  (let [all (clojure.string/split str_in #"\b+")]
-    (reduce 
-      ;;v = the # of counts of word so far.
-      (fn increment [w-map word] 
-        (let [v (w-map word)]
-         (assoc w-map word 
-            (if v (inc v) 1) ))) 
-    {} 
-    all)))
+  (let [all (clojure.string/split str_in #"\b+")
+        cnt-word (fn cnt-word [w-map word] 
+                   (let [v (w-map word)]
+                     (assoc w-map word 
+                        (if v (inc v) 1))))]
+    ;The magic happens here
+    (reduce cnt-word {} all)))
 
 
 
