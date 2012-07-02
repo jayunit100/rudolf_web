@@ -9,9 +9,13 @@
   {:pre [(= (type str_in) (type ""))]}
   (let [all (clojure.string/split str_in #"\b+")]
     (reduce 
-      #(let [v (%1 %2)] 
-         (assoc %1 %2 
-            (if v (inc v) 1) )) {} all)))
+      ;;v = the # of counts of word so far.
+      (fn increment [w-map word] 
+        (let [v (w-map word)]
+         (assoc w-map word 
+            (if v (inc v) 1) ))) 
+    {} 
+    all)))
 
 
 
