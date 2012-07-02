@@ -25,8 +25,7 @@ hand-waving.</p>
 <p>Thus, in this article, we'll see the basic steps for how to transform a string
 of characters into an abstract, executable representation of code.</p>
 
-<h3>
-<a name="parsing-overview" class="anchor" href="#parsing-overview"><span class="mini-icon mini-icon-link"></span></a>Parsing overview</h3>
+<h3>Parsing overview</h3>
 
 <p>The goal of parsing is to transform human- or computer-generated input text -- 
 into something the computer can understand and execute.</p>
@@ -44,8 +43,7 @@ import concepts:</p>
 <pre class="code"><code>(define x "hi")
 </code></pre>
 
-<h3>
-<a name="stage-1-lexing" class="anchor" href="#stage-1-lexing"><span class="mini-icon mini-icon-link"></span></a>Stage 1: Lexing</h3>
+<h3>Stage 1: Lexing</h3>
 
 <p>Here are Beagle's token definitions:</p>
 
@@ -88,8 +86,7 @@ or whitespace, and so they match the <code>SYMBOL</code> token</p></li>
 to make sure that there was never any possibility for ambiguity when tokenizing
 a string.</p>
 
-<h3>
-<a name="stage-2-get-rid-of-unwanted-tokens" class="anchor" href="#stage-2-get-rid-of-unwanted-tokens"><span class="mini-icon mini-icon-link"></span></a>Stage 2: get rid of unwanted tokens</h3>
+<h3>Stage 2: get rid of unwanted tokens</h3>
 
 <p>We don't need the comments or the whitespace for syntac analysis (although they would be
 useful to a tool that generates web-based documentation from a source code file, for
@@ -98,8 +95,7 @@ instance), so let's get rid of them, leaving us with these tokens:</p>
 <pre class="code"><code>["(", "define", "x", "4", ")"]
 </code></pre>
 
-<h3>
-<a name="stage-3-syntactic-analysis-" class="anchor" href="#stage-3-syntactic-analysis-"><span class="mini-icon mini-icon-link"></span></a>Stage 3: Syntactic analysis ###</h3>
+<h3>Stage 3: Syntactic analysis</h3>
 
 <p>In this step, we assemble the tokens according to our grammar, which is:</p>
 
@@ -160,8 +156,7 @@ Let's try it ourselves:</p>
   string: hi
 </code></pre>
 
-<h3>
-<a name="dealing-with-faulty-input" class="anchor" href="#dealing-with-faulty-input"><span class="mini-icon mini-icon-link"></span></a>Dealing with faulty input</h3>
+<h3>Dealing with faulty input</h3>
 
 <p>Real-world (read: useful) parsers will have to deal with problems such as:</p>
 
@@ -172,8 +167,7 @@ Let's try it ourselves:</p>
 </ul><p>I've heard it said that dealing with errors accounts for ~80% of the code in
 typical projects, and indeed, this is no exception, so let's skip it. :)</p>
 
-<h3>
-<a name="summary" class="anchor" href="#summary"><span class="mini-icon mini-icon-link"></span></a>Summary</h3>
+<h3>Summary</h3>
 
 <p>What did we do?  We saw that parsing can be split into:</p>
 
