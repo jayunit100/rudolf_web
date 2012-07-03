@@ -1,36 +1,40 @@
-<!DOCTYPE html PUBLIC>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Rudolf</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css" />
-<link href="default.css" rel="stylesheet" type="text/css" media="all" />
-<script src="https://www.google.com/jsapi"></script>
-<script>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>Rudolf blogger feed</title>
+ <meta name="keywords" content="" />
+ <meta name="description" content="" />
+ <link href="http://fonts.googleapis.com/css?family=Abel"
+	rel="stylesheet" type="text/css" />
+ <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+ <script src="https://www.google.com/jsapi"></script>
+ <script>
     google.load('jquery', '1.7.0');
-</script>
+ </script>
 </head>
+
 <body>
-            
-                <H1>This is our aggregated blog page (experimental).</H1>
-                	<H2>RudolF Blogs</H2>
-                    <div id="blog" class="post">
-                        <h2 class="title">Blog</h2>
-                        <div id="entry" class="entry"></div>
-                    </div>
-                    <H2>Programming Blogs</H2>
-                    <div id="jay" class="entry"></div>
+
+	<H1>This is our aggregated blog page (experimental)</H1>
+	<H2>RudolF Blogs</H2>
+	<div id="blog" class="post">
+		<h2 class="title">Blog</h2>
+		<div id="entry" class="entry"></div>
+	</div>
+	<H2>Programming Blogs</H2>
+	<div id="jay" class="entry"></div>
+
+
 <script type="text/javascript">
 $(document).ready(
-function() {
+  function() {
     $("#blog").load("/blog/");
-});
+  }
+);
 </script>
-
 <script src="srp.js"></script>
-<script src="http://jayunit100.blogspot.com/feeds/posts/default?alt=json-in-script&callback=showrecentposts"></script>
+<script	src="http://jayunit100.blogspot.com/feeds/posts/default?alt=json-in-script&callback=showrecentposts"></script>
 
 </body>
 </html>
