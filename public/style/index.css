@@ -2,61 +2,47 @@
 /* General styles */
 
 #logo {
-	background: #fff;
-	color: #000;
-	font: 100%/1 Arial, Helvetica, sans-serif;
-    padding: 0;
+    background: #fff;
+    color: #000;
+    font: 100%/1 Arial, Helvetica, sans-serif;
+    padding: 1em;
     margin-left: auto;
     margin-right: auto;
-    font-family: 'Mako', cursive;	
+    font-family: 'Mako', cursive;    
 }
 
 #teamdata {
-	margin-left: auto;
-	margin-right: auto;
-	border-width: 3px;
-	border-spacing: 6px;
-	border-style: solid;
-	border-color: black;
-	border-collapse: separate;
-	background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 3px;
+    border-spacing: 6px;
+    border-style: solid;
+    border-color: black;
 }
 
 #teamdata th {
-	border-width: 0px;
-	padding: 1px;
-	border-color: white;
-	background-color: white;
+    padding: 1px;
 }
 
 #teamdata td {
-	border-width: 1px;
-	padding: 20px;
-	border-style: solid;
-	border-color: white;
-	background-color: ;
-	-moz-border-radius: ;
+    padding: 20px;
 }
 
 #teamdata tr > td:first-child {
     font-weight: bold;
-    font-size: 1.5em;	
+    font-size: 1.5em;    
 }
 
 /* Positioning and dimensions */
 
-#logo {
-	padding: 1em;
-}
-
 #logo h1 {
-	height: 75px;
-	text-align: center;
-    font-family: 'Audiowide', cursive;	/** Making the contact special font also. **/
+    height: 75px;
+    text-align: center;
+    font-family: 'Audiowide', cursive;    /** Making the contact special font also. **/
 }
 
 #logo h1 span {
-	height: 100%;
+    height: 100%;
 }
 
 #logo a {
@@ -66,10 +52,10 @@
 
 /* Setting the font size, colors */
 #css, #day {
-	font-size: 48px;
+    font-size: 48px;
 }
 
 #css {
-	color: #c00;
-	text-decoration: underline;
+    color: #c00;
+    text-decoration: underline;
 }
