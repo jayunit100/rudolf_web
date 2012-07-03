@@ -22,15 +22,13 @@
      (try (bt/read-article a)
           (catch Exception e (is (= 1 2) (str "failed to read article file " a ", exception " e))))))))
 
+(deftest test-can-render-all-articles-without-exceptions
+  (let [af (bt/read-articles-file)]
+    (doall
+      (for [a (af :articles)]
+        (try (is (> (count (bt/post a)) 100))
+             (catch Exception e (is false (str "failed to render article file " a ", exception " e))))))))
 
-(deftest test-index
-  (is (> (count (bt/index)) 100)))
-
-;;This test pends that the mysql_tutorial actually exists and 
-;;should be written to span each of the existing articles. 
-;;It might be an example of over testing.
-(deftest test-post
-  (is (> (count (bt/post "rudolf_architecture")) 100)))
 
 
 (deftest test-header-and-footer
@@ -55,8 +53,7 @@
 (deftest test-body-header-html
   (let [str_articles_html (hc/html (bt/body-header ((bt/read-articles-file) :articles)))]
     (is (.contains str_articles_html "rudolf_architecture"))
-    (is (.contains str_articles_html "mysql_tutorial"))
-    ))
+    (is (.contains str_articles_html "mysql_tutorial"))))
 
 (deftest test-make-link
   (is (= 3 (count (bt/make-link "abcd")))))
