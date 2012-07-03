@@ -5,16 +5,31 @@ csseasy.com or to profit42.com (best "blog about hacking" ever).
 Donations are also welcome: paypal@profit42.com (or follow the donation button on csseasy.com)
 */
 
+/* http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body {
-	background-color: #dc8;
 	font-size: 16px;
 	margin: 0;
 	padding: 0;
 }
 
+body>div {
+	padding: 25px;
+}
+
+#header, #footer {
+	text-align: center;
+}
+
 #header {
 	background-color: red;
 	height: 150px;
+	font-size: 4em;
 }
 
 #left {
@@ -36,6 +51,6 @@ body {
 
 #footer {
 	clear: both;
-	background-color: white;
+	background-color: orange;
 	height: 100px;
 }
