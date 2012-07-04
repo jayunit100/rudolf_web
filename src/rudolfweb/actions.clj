@@ -5,8 +5,8 @@
   (:require [clojure.data.json      :as json])
   (:require [compojure.core         :as cc]) 
   (:require [rudolfweb.blogtemplate :as rbt])
-  (:require [compojure.route        :as route]
-            [ring.util.response     :as resp]))
+  (:require [compojure.route        :as route])
+  (:require [ring.util.response     :as resp]))
 
 ;;This is made to look the same way facebook jsons look, they 
 ;;are preformatted html (not plain text).
@@ -24,7 +24,7 @@
        (resp/redirect "/Home.html"))
 
   (cc/GET "/blog/" []                                   
-       (hc/html (rudolfweb.blogtemplate/post "x")))
+       (resp/redirect "/blog/blog_home"))
 
   (cc/GET "/blog/:name" {params :params}                       ;; (may be) destructuring: the GET macro binds a map of parameters to params
        (hc/html (rudolfweb.blogtemplate/post (params :name)))) ;; then we pull out the name and pass it to the blog page generator
