@@ -34,8 +34,7 @@
          [:meta {:name "description" :content "Interesting articles about programming"}]
          [:meta {:name "keywords" :content "RudolF, programming"}]
          [:meta {:name "author" :content "RudolF"}]
-         [:link {:rel "stylesheet" :type "text/css" :href "/style/bloglayout.css"}]
-         [:link {:rel "stylesheet" :type "text/css" :href "/style/blogcontent.css"}]])
+         [:link {:rel "stylesheet" :type "text/css" :href "../style/bloghome.css"}]])
 
 
 (defn read-article

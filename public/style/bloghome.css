@@ -1,11 +1,4 @@
 
-/* http://paulirish.com/2012/box-sizing-border-box-ftw/ */
-* {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
 html, body {	
 	height: 100%;
 	margin: 0px;
@@ -60,4 +53,45 @@ html, body {
 #content > div {
 	padding: 10px;
 	
+}
+
+
+.code {
+  background-color: #F8F8F8;
+  border: 1px solid #CCC;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace;
+}
+
+
+.box {
+  background-color: black;
+  color: yellow;
+  padding: 5px;
+}
+
+.good {
+  color: green;
+}
+
+.bad {
+  color: red;
+}
+
+/* center the text in tables */
+table th, table tr {
+  text-align: center;
+}
+
+/* to draw borders around td's and th's in tables */
+.bordered, .bordered th, .bordered td {
+  border: 2px solid black;
+}
+
+/* to give th's and td's padding */
+.padded th, .padded td {
+  padding: 5px;
 }
