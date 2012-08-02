@@ -8,7 +8,7 @@
   (:require [compojure.route        :as route])
   (:require [ring.util.response     :as resp]))
 
-;;This is made to look the same way facebook jsons look, they 
+;; This is made to look the same way facebook jsons look, they 
 ;;are preformatted html (not plain text).
 (defn layout-word-enrichment
   ""
