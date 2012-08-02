@@ -1,4 +1,4 @@
-The RudolF blog-algorithms-site-playground! 
+ The RudolF blog-algorithms-site-playground! 
      
 It uses 
                               
