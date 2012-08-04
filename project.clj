@@ -8,6 +8,7 @@
                  [clj-yaml "0.3.0-SNAPSHOT"]
                  [hiccup "0.3.7"]
                  [org.clojure/data.json "0.1.2"]
-                 ];;<-- add processing?
+                 [clojure-csv/clojure-csv "2.0.0-alpha1"]  
+               ];;<-- add processing?
   :dev-dependencies
 	        [[ring/ring-devel "0.2.3"]])
