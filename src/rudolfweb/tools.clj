@@ -1,5 +1,11 @@
 (ns rudolfweb.tools
-  (:require [clojure.string]))
+  (:require [clojure.string])
+  (:use clojure.test
+        clojure.java.io
+        clojure-csv.core))
+
+(import '(java.io BufferedReader StringReader))
+
 
 ;;calculate word enrichment from a string
 (defn word-enrichment 
@@ -15,6 +21,14 @@
     ;The magic happens here
     (reduce cnt-word {} all)))
 
+;;Crawls a url, expecting CSV, and converts it to json 
+(defn csv-to-json
+  "input : a url, with csv content
+   output : clojure data structure w/ csv contents 
+   (no gaurantee on what the data structure is). "
+  [str_url]
+  {:pre (= (type str_url) (type ""))}
+  (parse-csv (slurp str_url)))
 
 
 ;;Crawls a url, then calculates word enrichment from it.
