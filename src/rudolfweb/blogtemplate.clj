@@ -1,6 +1,6 @@
 (ns rudolfweb.blogtemplate
   (:require [hiccup.core            :as hc])
-  (:require [hiccup.page-helpers    :as hph])
+  (:require [hiccup.page    :as hph])
   (:require [clojure.contrib.string :as cs])
   (:require [clj-yaml.core          :as yaml]))
 
