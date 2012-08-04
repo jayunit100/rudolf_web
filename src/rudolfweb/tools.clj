@@ -2,7 +2,8 @@
   (:require [clojure.string])
   (:use clojure.test
         clojure.java.io
-        clojure-csv.core))
+        clojure-csv.core
+        clojure.data.json));;should use "only" here! (use '[clojure.data.json :only (read-json json-str)])
 
 (import '(java.io BufferedReader StringReader))
 
@@ -28,7 +29,7 @@
    (no gaurantee on what the data structure is). "
   [str_url]
   {:pre (= (type str_url) (type ""))}
-  (parse-csv (slurp str_url)))
+  (json-str (parse-csv (slurp str_url)) ))
 
 
 ;;Crawls a url, then calculates word enrichment from it.

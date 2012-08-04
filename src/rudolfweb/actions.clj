@@ -15,6 +15,11 @@
   [url]
   (json/json-str (rts/word-enrichment-url url)))
 
+(defn layout-csv-to-json
+  ""
+  [url]
+  (json/json-str (rts/csv-to-json url)))
+
 (cc/defroutes main-routes
 
   (cc/GET "/" [] 
@@ -40,6 +45,12 @@
           {:status 200 
            :headers {"Content-Type" "text/json"} 
            :body  (layout-word-enrichment (params :url))})
-      
+
+   (cc/GET "/tools/:csv-to-json"
+          {params :params}
+          {:status 200
+           :headers {"Content-Type" "text/json"}
+           :body  (layout-csv-to-json (params :url))})
+    
   (route/not-found 
        "<h1>Page not found</h1>"))
