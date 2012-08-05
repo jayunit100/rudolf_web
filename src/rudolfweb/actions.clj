@@ -40,17 +40,17 @@
 	;; word enrichment tool: 
   ;;   input:  url
   ;;   output: word counts as json
-  (cc/GET "/tools/:wordenrichment_url" 
+  (cc/GET "/tools/wordenrichment_url" 
           {params :params} 
           {:status 200 
            :headers {"Content-Type" "text/json"} 
            :body  (layout-word-enrichment (params :url))})
 
-   (cc/GET "/tools/:csv-to-json"
+  (cc/GET "/tools/csv-to-json"
           {params :params}
           {:status 200
            :headers {"Content-Type" "text/json"}
            :body  (layout-csv-to-json (params :url))})
     
   (route/not-found 
-       "<h1>Page not found</h1>"))
+       "Ooops - if your url has colons in it, remove them, and try again. Otherwise, maybe this service is down ! Contact jayunit100@rudolflabs.com for help!"))
