@@ -4,6 +4,9 @@
   (:require [clojure.string     :as cs])
   (:require [clojure.data.json  :as json]))
 
+(deftest test-csv-to-json 
+ (is (.contains (csv-to-json
+   "http://csvutil4j.googlecode.com/hg-history/5de0be19c13f593abb445868745c48736ea5f2ef/csvutil4j-csv/src/test/resources/example.csv") "break" )))
 
 (deftest snippet1
   (is (= 4 (count (cs/split "ABCAD ABBBBB ABCAD 12" #"\s+")))))
@@ -12,6 +15,7 @@
   (is (= 3 (count 
             (into {} 
              (map vector [:a :b :c] (repeat 0)))))))
+
 
 
 (deftest test-word-enrichment

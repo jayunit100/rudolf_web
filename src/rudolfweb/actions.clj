@@ -1,6 +1,6 @@
 (ns rudolfweb.actions
   (:require [hiccup.core            :as hc]) 
-  (:require [hiccup.form-helpers    :as hph])
+  (:require [hiccup.form    :as hph])
   (:require [rudolfweb.tools        :as rts])
   (:require [clojure.data.json      :as json])
   (:require [compojure.core         :as cc]) 
@@ -14,6 +14,11 @@
   ""
   [url]
   (json/json-str (rts/word-enrichment-url url)))
+
+(defn layout-csv-to-json
+  ""
+  [url]
+  (json/json-str (rts/csv-to-json url)))
 
 (cc/defroutes main-routes
 
@@ -40,6 +45,12 @@
           {:status 200 
            :headers {"Content-Type" "text/json"} 
            :body  (layout-word-enrichment (params :url))})
-      
+
+   (cc/GET "/tools/:csv-to-json"
+          {params :params}
+          {:status 200
+           :headers {"Content-Type" "text/json"}
+           :body  (layout-csv-to-json (params :url))})
+    
   (route/not-found 
        "<h1>Page not found</h1>"))
