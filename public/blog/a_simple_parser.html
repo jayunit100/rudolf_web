@@ -1,0 +1,237 @@
+<div class="chunk">
+<h2>Building a practical parser</h2>
+
+<p>Parsing is often seen as a black art, involving heavy-duty parser generators,
+complicated BNF grammars, abstract syntax trees, symbol tables .... Much of this
+is due to the fact that most programming languages have very complicated syntax.</p>
+
+<p>At the other end of the spectrum, Lisps can be very easy to parse, due to their uniform,
+parenthesized syntax!  So, we'll see how to design and build a parser for a
+simple -- but powerful -- Lisp-based programming language.  We'll cover the
+basic steps for how to transform a string
+of characters into an abstract, executable representation of code.</p>
+
+<p>My goal in writing this article is to give a clear, practical, and useful
+explanation for how to build a parser.  Using a Lisp as an example language
+helps keep the discussion simple and to the point.</p>
+</div>
+
+
+
+<div class="chunk">
+<h2>Parsing overview</h2>
+
+<p>The goal of parsing is to transform input text into an abstract syntax tree
+or AST, which is a code representation that the computer understands.
+The AST can then be executed directly (interpretation), transformed into
+code in another language (compilation), or perhaps analyzed to generate 
+code statistics.</p>
+
+<p>Parsing is often broken down into 3 main steps:</p>
+
+<ol>
+ <li>lexing (AKA tokenization or scanning):  convert an input string into tokens.  </li>
+ <li>throw away tokens such as whitespace and comments that do not
+contribute to the executable code</li>
+ <li>syntactic analysis:  assemble the tokens to form phrases and sentences</li>
+</ol>
+
+<p>For the rest of this article, we'll use this simple example to demonstrate
+import concepts:</p>
+
+<pre class="code">(define x "hi")
+</pre>
+</div>
+
+
+
+<div class="chunk">
+<h2>Stage 1: Lexing</h2>
+
+The goal of lexing is to break the concrete characters of the string into a sequence of
+tokens.  Good token definitions will avoid overlap as much as possible for three reasons:
+1) it's easier to build a correct parser; 2) it's easier to provide useful error messages,
+when the input fails; 3) it's easier for a user to understand the language.
+
+<p>Here are the token definitions we'll use.  Note how the first character can uniquely
+determine which token is expected:</p>
+
+<pre class="code">
+STRING:         "[^\"]*"
+
+SYMBOL:         [a-zA-Z0-9]+
+
+OPEN:           (
+
+CLOSE:          )
+
+WHITESPACE:     \s+
+</pre>
+
+Running a lexer built from those token definitions over our example input yields these tokens:
+
+<pre class="code">
+OPEN
+SYMBOL:       define
+WHITESPACE:   ' '
+SYMBOL:       x
+WHITESPACE:   ' '
+STRING:       "hi"
+CLOSE
+</pre>
+
+</div>
+
+
+
+<div class="chunk">
+<h2>Stage 2: get rid of unwanted tokens</h2>
+
+<p>We don't need the comments or the whitespace for syntacic analysis (although they would be
+useful to a tool that generates web-based documentation from a source code file, for
+instance), so let's get rid of them, leaving us with these tokens:</p>
+
+<pre class="code">
+OPEN
+SYMBOL:  define
+SYMBOL:  x
+STRING:  "hi"
+CLOSE
+</pre>
+</div>
+
+
+
+<div class="chunk">
+<h2>Stage 3: Syntactic analysis</h2>
+
+<p>In this step, we assemble the tokens according to our grammar, which is:</p>
+
+<pre class="code">
+Program:   SExpr(+)
+
+SExpr:     Atom  |  List
+
+List:      OPEN  SExpr(*)  CLOSE
+
+Atom:      SYMBOL  |  STRING
+</pre>
+
+<p>
+To parse this, we start matching our input to our rules:
+<pre class="code">
+input: [OPEN, SYMBOL define, SYMBOL x, STRING "hi", CLOSE]
+
+try Program ...
++try SExpr ...
+++try ATOM ...
++++try STRING ... failed
++++try SYMBOL ... failed
++++ATOM failed
+++try List ...
++++try OPEN ... matched, input now [SYMBOL define, SYMBOL x, STRING "hi", CLOSE]
++++try SExpr ...
+++++try ATOM ...
++++++try SYMBOL ... matched, input now [SYMBOL x, STRING "hi", CLOSE]
++++try SExpr ...
+++++try ATOM ...
++++++try SYMBOL ... matched, input now [STRING "hi", CLOSE]
++++try SExpr ...
+++++try ATOM ...
++++++try SYMBOL ... failed
++++++try STRING ... matched, input now [CLOSE]
++++try SExpr ...
+++++try ATOM ...
++++++try SYMBOL ... failed
++++++try STRING ... failed
++++++ATOM failed
+++++try List ...
++++++try OPEN ... failed
++++++List failed
+++++SExpr failed
++++try CLOSE ... matched, input now []
+++List matched
++SExpr matched
++try SExpr ...
+++try Atom ...
++++try SYMBOL ... failed
++++try STRING ... failed
++++ATOM failed
+++try List ...
++++try OPEN ... failed
++++List failed
+++SExpr failed
++Program matched
+</pre>
+
+So it worked, matching all of our input.  The parse tree then looks like this:
+<pre class="code">
+program
+ | list
+ |  | symbol:  define
+ |  | symbol:  x
+ |  | string:  "hi"
+</pre>
+
+That would then be passed to the next stage -- interpreter, compiler, static analyzer, etc. -- for
+further processing.
+</p>
+</div>
+
+
+
+<div class="chunk">
+<h2>Is it necessary to have a two-stage parser?</h2>
+
+<p>
+Does tokenization have to be split into a separate step?  No, it's not absolutely necessary.
+However, there are certain advantages to doing so: 1) the syntactic grammar is freed from 
+worrying about the concrete details of the actual string -- it's more abstract; 2) there are 
+fewer possibilities to choose from at any point during parsing, allowing error messages to be
+clearer and shorter; 3) it keeps the grammar and token definitions simpler and clearer; 4)
+parsers are much more efficient when using a pre-pass for tokenization.
+</p>
+</div>
+
+
+<div class="chunk">
+<h2>Dealing with faulty input</h2>
+
+<p>Real-world parsers will have to deal with problems such as:</p>
+
+<ul>
+ <li>error detection</li>
+ <li>error messages</li>
+ <li>error-tolerance</li>
+</ul>
+
+These are tricky topics, but generally, a parser needs to accurately report
+where errors were detected, some of the context of the error, and why the
+input was wrong -- that is, what was the parser expecting?
+
+Parsers that detect errors but don't correctly report *where* they occurred
+are a huge pain to use; reporting context and expected input gives the user
+quick feedback about what's going on; and reporting multiple errors at the
+same time allows the user to quickly diagnose and fix multiple problems,
+which can be a huge time saver compared to having to re-run the parser after
+every single error.
+</div>
+
+
+
+<div class="chunk">
+<h2>Wrap up</h2>
+
+<p>The basic steps of parsing are:</p>
+
+<ul>
+ <li>tokenizing a string, using regular expressions</li>
+ <li>discarding uninteresting tokens</li>
+ <li>assembling tokens into a parse tree, using a grammar</li>
+ <li>detecting and reporting any errors to the user with meaningful feedback</li>
+</ul>
+
+<p>If you'd like to see real code for such a parser, 
+you can find<a href="https://github.com/mattfenwick/Beagle">it here</a>!
+</p>
+</div>

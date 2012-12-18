@@ -1,0 +1,120 @@
+<div class="chunk">
+<h2> A brief review of SQL and RA</h2>
+
+Many programmers are familiar with some flavor of Structured Query Language (SQL), used for querying and administrating many common database products, and relational algebra (RA), which is the mathematical underpinnings of SQL and relational databases as we currently know them.
+
+Relational algebra deals with relations comprised of tuples, and operations for transforming and combining them.  Here is an example of a relation:
+
+<pre class="code">
+  name  |  weight
+ -----------------
+  Mary  |   110
+  Kyle  |   165
+  Kevin |   205
+  Lucy  |   120
+</pre>
+
+In this relation, there are two columns.  Each of the four rows has a value for each column; the rows are tuples.
+
+Furthermore, RA defines six basic operators:  projection, rename, product, selection, union, and difference.  From these, many more complicated and more useful operators can be derived.
+
+SQL is a query language heavily based on RA that makes it very convenient to work with relationally structured data.
+
+However, both RA and SQL have a number of shortcomings which make some things difficult and obtuse to accomplish.  I'll spend the rest of this post discussing some of these things.
+</div>
+
+
+
+<div class="chunk">
+<h2>Unable to step outside of SQL/RA</h2>
+
+SQL and RA are great for working purely with relations, but are otherwise severely limited.  
+
+For example, what if you need to generate a list of numbers from 1 to 10 for a filter predicate -- it's possible but it's not easy.  Or what if you need to create a datatype with an API that disallows certain values?  That's going to be nearly impossible.  Or if you have to rank all tuples in a relation -- the standard, pure SQL solution involves an O(n**2) self-join solution, which is absurd considering it's at worst an n * log(n) problem.
+
+Unfortunately for SQL/RA, such situations -- in which they are not sufficient or particularly well-suited to the task -- are very often encountered, and the resulting solutions are necessarily work-arounds, which means they're harder to debug, understand, and maintain.
+</div>
+
+
+
+<div class="chunk">
+<h2>Tuples have to be flat</h2>
+
+The relational model of data views tuples as being constructed out of n values of primitive types, where n >= 1, and the primitive types are typically numbers, booleans, strings, and times.  This model is important for data storage, as its flat nature allows any data to be immediately obtained without any 'digging' through hierarchical layers.  However, when creating complex queries, strict adherence to flat tuples is more painful than helpful.
+
+For example, a 'group by' query returns one row per group, each row typically including the grouped-on column(s) and aggregate values calculated for some other column(s).  However, this is far less useful than allowing a list of all the rows in that group, as is clear when one tries to get the 'top n' rows from each group:
+
+<pre class="code">
+
+  student | score
+ ------------------
+   Jake   |  84
+  Blake   |  93
+   Jake   |  62
+   Jake   |  79
+  Blake   |  93
+  Blake   |  84
+
+-- goal: calculate the average of the top two scores for each student
+
+-- first, let's group by 'student'
+  student | scores
+ ------------------
+   Jake   | [84, 62, 79]
+  Blake   | [93, 93, 84]
+
+-- now take the top two
+  student | top 2 scores
+ ------------------
+   Jake   | [84, 79]
+  Blake   | [93, 93]
+
+-- and average them
+  student | scores
+ ------------------
+   Jake   |   81.5
+  Blake   |    93   
+
+</pre>
+
+This is a straightforward problem to solve, if richer tuple types are allowed, but as they are not, the solutions become convoluted and obtuse.  Again, I'd just like to emphasize that the flat model is great for data storage, but unnecessarily restricting when it comes to building queries.
+</div>
+
+
+
+
+<div class="chunk">
+<h2>User-defined abstractions are limited</h2>
+
+If you've read SICP, you may remember the authors stating that the three main aspects of programming are primitives, means of abstraction, and means of composition.
+
+SQL and RA certainly have primitives, and composition isn't impossible, but they both fall flat on abstraction.  Users are unable to create single-valued functions, aggregate functions, table-valued functions, or to encapsulate a table-manipulation as a single procedure.  (For example, most if not all database products lack a 'divide by' operator; this is a complex, multi-step procedure, and very difficult to get right.  It can't be implemented as a function, and thus must be painstakingly reimplemented time and again ... if it were available as a simple library, imagine how easy it would be to use.)
+
+The lack of easily user-defined string-processing functions is often bothersome, and results in gigantic and unwieldy built-in libraries of obtuse string processing functions.  If the user could define, and share, them such built-in libraries would be unnecessary.
+
+The basic -- and only?-- unit of abstraction is a view, but views are not parameterizable, and thus can't be reused to perform a similar operation on multiple tables.
+
+SQL/RA also lack common organization features found in modern programming languages, such as modules, classes, namespaces ... 
+</div>
+
+
+
+<div class="chunk">
+<h2>SQL and RA are typically first order</h2>
+
+I've seen this mentioned in a few places, and the poster child example is that you can't calculate transitive closure using pure SQL/RA.  I've also read the lack of recursion is limiting, and that relations aren't first class values.  
+
+As I don't completely understand these points, I'll wait until later to flesh out this section.
+</div>
+
+
+
+<div class="chunk">
+<h2>Conclusion</h2>
+
+To be fair, many of these problems have already been addressed by widely used database products.  The solutions typically involve embedding SQL in some kind of general purpose procedural or imperative language, which is then harnessed to create useful abstractions and extend SQL's functionality.
+
+I think this is a good approach and will continue to become more popular as the benefits of tight integration between non-procedural SQL-like code and procedural code are better understood.
+
+SQL and RA are awesome tools for working with structured data and sets.  But by themselves, they're not anywhere near as powerful as they can be when embedded in a general-purpose programming language.
+</div>

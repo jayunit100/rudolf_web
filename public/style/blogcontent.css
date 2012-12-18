@@ -38,3 +38,7 @@ table th, table tr {
 .padded th, .padded td {
   padding: 5px;
 }
+
+.chunk {
+  padding: 10px;
+}
