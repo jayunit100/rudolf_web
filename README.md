@@ -13,11 +13,11 @@ Get Started By running locally
 
         $ lein deps
 
-* start clojure from inside the project
+* start Clojure from inside the project
 
         $ lein repl 
 
-* and from the repl:
+* and from inside the Clojure repl:
 
         user=> (use 'rudolfweb.main-local) 
         user=> (boot) 
@@ -45,16 +45,17 @@ Deployment to rudolfcode.heroku.com
 
 First method
 
-- Certify your keys with heroku (email jay to add you to the heroku app authenticated users emails)
-- Install the heroku toolbelt. 
-- git remote add heroku git@heroku.com:appname.git
---->  git remote add git@heroku.com:rudolfcode.git
+- certify your keys with heroku (email jay to add you to the heroku app authenticated users emails)
+- install the heroku toolbelt
+- then:
 
+        git remote add heroku git@heroku.com:appname.git
+        git remote add git@heroku.com:rudolfcode.git
 
 
 Automated method (beta)
 
-- Push to github (this is experimental, and underway, we will see if it works).
+- push to github (this is experimental, and underway, we will see if it works).
 
 Pushing and Pulling 
 -------------------
@@ -70,4 +71,4 @@ Pushing and Pulling
 License
 -------
 This is distributed under the RudolF license, which means that you can use it however you 
-want to as long as you say good things about functional & stateless programming.
+want to as long as you say good things about functional & compositional programming.
