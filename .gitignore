@@ -1,3 +1,7 @@
 lib
 *jar
 ._*
+.classpath
+.lein-failures
+.project
+.gitignore
